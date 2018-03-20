@@ -1,12 +1,30 @@
 package com.sd.demo;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
+@Entity
 public class Editorial {
 	
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String nombre;
+	
 	private int numTelefono;
 	private String email;
 	private String direccionPostal;
 	private String codigoIF;
+	
+	@OneToMany(mappedBy="editorial")
+	private List<Libro> libros;
+	
 	
 	public Editorial() {
 		

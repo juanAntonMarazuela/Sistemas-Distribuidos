@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Libro {
@@ -14,13 +15,15 @@ public class Libro {
 
 	private String autor;
 	private String titulo;
-	private Editorial editorial;
 	private String añoPublicacion;
 	private int numPaginas;
 	private String isbn;
 	private double precio;
 	private String categoria;
 	
+	@ManyToOne
+	private Editorial editorial;
+
 	public Libro() {
 		
 	}
@@ -56,7 +59,7 @@ public class Libro {
 	public Editorial getEditorial() {
 		return editorial;
 	}
-
+	
 	public void setEditorial(Editorial editorial) {
 		this.editorial = editorial;
 	}
