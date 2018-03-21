@@ -1,4 +1,4 @@
-package com.sd.demo;
+package com.sd.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ public class Libro {
 
 	private String autor;
 	private String titulo;
-	private String añoPublicacion;
+	private int añoPublicacion;
 	private int numPaginas;
 	private String isbn;
 	private double precio;
@@ -28,7 +28,7 @@ public class Libro {
 		
 	}
 	
-	public Libro(String autor,String titulo,Editorial editorial, String añoPublicacion
+	public Libro(String autor,String titulo,Editorial editorial, int añoPublicacion
 			,int numPaginas, String isbn, double precio, String categoria) {
 		this.autor = autor;
 		this.titulo = titulo;
@@ -38,6 +38,7 @@ public class Libro {
 		this.isbn = isbn;
 		this.precio = precio;
 		this.categoria = categoria;
+		
 	}
 
 	public String getAutor() {
@@ -64,11 +65,11 @@ public class Libro {
 		this.editorial = editorial;
 	}
 
-	public String getAñoPublicacion() {
+	public int getAñoPublicacion() {
 		return añoPublicacion;
 	}
 
-	public void setAñoPublicacion(String añoPublicacion) {
+	public void setAñoPublicacion(int añoPublicacion) {
 		this.añoPublicacion = añoPublicacion;
 	}
 
