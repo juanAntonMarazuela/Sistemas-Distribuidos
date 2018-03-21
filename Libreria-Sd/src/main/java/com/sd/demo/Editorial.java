@@ -38,7 +38,7 @@ public class Editorial {
 		this.direccionPostal = direccionPostal;
 		this.codigoIF = codigoIF;
 	}
-
+	
 	public String getNombre() {
 		return nombre;
 	}
