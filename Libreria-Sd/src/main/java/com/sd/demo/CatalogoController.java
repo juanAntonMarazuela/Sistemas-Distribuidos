@@ -13,9 +13,16 @@ public class CatalogoController {
 	
 	@RequestMapping("/")
 	   public String tablon(Model model) {	
-	      model.addAttribute("libros", repLibros.findAll());
 	      return "index";
 	   }
+	@RequestMapping("/catalogo")
+	public String catalogo() {
+		return "catalogo";
+	}
+	@RequestMapping("/editorial")
+	public String editorial() {
+		return "editorial";
+	}
 
 
 }
