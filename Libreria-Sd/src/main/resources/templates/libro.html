@@ -23,7 +23,7 @@
 						<div class="inner">
 
 							<!-- Logo -->
-								<a href="index.html" class="logo">
+								<a href="/" class="logo">
 									<span class="symbol"><img src="assets/images/iconoLibro" alt="" /></span><span class="title">Libreria</span>
 								</a>
 
@@ -41,10 +41,10 @@
 					<nav id="menu">
 						<h2>Menu</h2>
 						<ul>
-							<li><a href="index.html">Inicio</a></li>
-							<li><a href="catalogo.html">Catalogo</a></li>
-							<li><a href="editorial.html">Editoriales</a></li>
-							<li><a href="nuevoLibro.html">Añadir libro</a></li>
+							<li><a href="/">Home</a></li>
+							<li><a href="/catalogo">Catálogo</a></li>
+							<li><a href="/editorial">Editoriales</a></li>
+							<li><a href="/nuevoLibro">Añadir libro</a></li>
 						</ul>
 					</nav>
 
@@ -58,6 +58,15 @@
 								<span th:text="'Autor:' + ${libro.autor}"/>
 								<br>
 								<span th:text="'Precio:' + ${libro.precio}"/>
+								<br>
+								<span th:text="'Número de páginas: ' + ${libro.numPaginas}"/>
+								<br>
+								<span th:text="'Isbn: ' + ${libro.isbn}"/>
+								<br>
+								<span th:text="'Categoria: ' + ${libro.categoria}"/>
+								<br>
+								<span th:text="'Editorial:' + ${${libro.editorial}.nombre}"/>
+								
 						</div>
 					</div>
 					

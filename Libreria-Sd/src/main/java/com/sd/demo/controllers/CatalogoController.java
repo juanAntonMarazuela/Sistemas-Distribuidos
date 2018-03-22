@@ -21,9 +21,7 @@ public class CatalogoController {
 	private LibroRepository libRep;
 	@Autowired
 	private EditorialRepository editRep;
-	
-	public static List<Libro> libros = new ArrayList<>();
-	
+		
 	@PostConstruct
 	public void init() {
 		Editorial e1 = editRep.findByNombre("Bruño");
