@@ -16,8 +16,9 @@ public class Editorial {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String nombre;
+	private Long id;
 	
+	private String nombre;
 	private int numTelefono;
 	private String email;
 	private String direccionPostal;

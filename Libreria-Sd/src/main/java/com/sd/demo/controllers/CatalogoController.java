@@ -33,7 +33,8 @@ public class CatalogoController {
 		return "index";
 	}
 	@RequestMapping("/catalogo")
-	public String catalogo() {
+	public String catalogo(Model model) {		
+		model.addAttribute("libros",libRep.findAll());
 		return "catalogo";
 	}
 
