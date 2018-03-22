@@ -1,5 +1,8 @@
 package com.sd.demo.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class CatalogoController {
 	private LibroRepository libRep;
 	@Autowired
 	private EditorialRepository editRep;
+	
+	public static List<Libro> libros = new ArrayList<>();
 	
 	@PostConstruct
 	public void init() {

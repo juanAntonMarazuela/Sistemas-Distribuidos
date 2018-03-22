@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Libro</title>
+		<title>Libro insertado</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -24,7 +24,7 @@
 
 							<!-- Logo -->
 								<a href="index.html" class="logo">
-									<span class="symbol"><img src="assets/images/iconoLibro" alt="" /></span><span class="title">Libreria</span>
+									<span class="symbol"><img src="/assets/images/iconoLibro.png" alt="" /></span><span class="title">Libreria</span>
 								</a>
 
 							<!-- Nav -->
@@ -42,7 +42,7 @@
 						<h2>Menu</h2>
 						<ul>
 							<li><a href="index.html">Inicio</a></li>
-							<li><a href="catalogo.html">Catalogo</a></li>
+							<li><a href="catalogo.htmml">Catalogo</a></li>
 							<li><a href="editorial.html">Editoriales</a></li>
 							<li><a href="nuevoLibro.html">Añadir libro</a></li>
 						</ul>
@@ -51,17 +51,11 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Libro</h1>
-							<p th:each="libro: ${libros}">
-								<span th:text="'Titulo:' + ${libro.titulo}"/>
-								<br>
-								<span th:text="'Autor:' + ${libro.autor}"/>
-								<br>
-								<span th:text="'Precio:' + ${libro.precio}"/>
+							<h1>¡Libro añadido con éxito!</h1>
+							<br>
+							<a href="/">Volver</a>
 						</div>
 					</div>
-					
-					<a href="/">Volver</a>
 
 				<!-- Footer -->
 					<footer id="footer">
