@@ -9,5 +9,5 @@ import com.sd.demo.entity.Libro;
 
 public interface EditorialRepository extends JpaRepository<Editorial, Long>{
 	Editorial findByNombre(String nombre);
-	
+	List<Editorial> findByNombreAndCodigoIF(String nombre, String codigoif);
 }
