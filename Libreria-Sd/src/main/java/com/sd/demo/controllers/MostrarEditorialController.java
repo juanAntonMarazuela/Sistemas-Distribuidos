@@ -19,9 +19,9 @@ public class MostrarEditorialController {
 	private EditorialRepository editRep;
 	
 	@RequestMapping("/mostrareditorial")
-	public String mostrar(@RequestParam String nombre,@RequestParam String codigoif, Model model) {
+	public String mostrar(@RequestParam String nombre,@RequestParam String email,@RequestParam Integer numTelefono,@RequestParam String direccionPostal,@RequestParam String codigoIF, Model model) {
 		
-		List<Editorial> variaseditoriales = editRep.findByNombreAndCodigoIF(nombre,codigoif);
+		List<Editorial> variaseditoriales = editRep.findByNombreAndEmail(nombre,email);
 		model.addAttribute("editoriales", variaseditoriales);
 		return "editorialespecifica";
 	}

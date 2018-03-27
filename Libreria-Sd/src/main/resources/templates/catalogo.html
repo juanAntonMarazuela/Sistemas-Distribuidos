@@ -54,7 +54,7 @@
 							<h1>Todos los libros</h1>
 								<p th:each="libro : ${libros}">
 									<a th:href="@{/mostrarlibro(titulo=${libro.titulo}, autor=${libro.autor}, precio=${libro.precio},numPaginas=${libro.numPaginas},isbn=${libro.isbn},categoria=${libro.categoria},edit=${libro.editorial})}" th:text="${libro.titulo}"></a>
-									<a th:text="${libro.autor}"></a>
+									<!-- <a th:text="${libro.autor}"></a> -->
 								</p>
 								
 							
