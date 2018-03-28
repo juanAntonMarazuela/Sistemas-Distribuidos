@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -22,14 +23,16 @@ public class Libro {
 	private String categoria;
 	
 	@ManyToOne
+	@JoinColumn(name = "ideditorial")
 	private Editorial editorial;
+	
 
 	public Libro() {
 		
 	}
 	
-	public Libro(String autor,String titulo,Editorial editorial, int añoPublicacion
-			,int numPaginas, String isbn, double precio, String categoria) {
+	public Libro(String autor,String titulo, int añoPublicacion
+			,int numPaginas, String isbn, double precio, String categoria, Editorial editorial) {
 		this.autor = autor;
 		this.titulo = titulo;
 		this.editorial = editorial;

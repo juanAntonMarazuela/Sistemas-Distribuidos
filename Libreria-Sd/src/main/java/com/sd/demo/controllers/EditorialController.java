@@ -22,9 +22,20 @@ public class EditorialController {
 		editRep.save(new Editorial("Booket",612983512,"booket@gmail.com","Callao","71273"));
 		editRep.save(new Editorial("Planeta",632839182,"planeta@gmail.com","Castellana","71829"));
 	}
+	
+	@RequestMapping("/insertarEditorial")
+	public String insertarEditorial(Editorial editorial, Model model) {
+		editRep.save(editorial);
+		return "insertarEditorial";
+	}
 	@RequestMapping("/editorial")
 	public String editorial(Model model) {
 		model.addAttribute("editoriales",editRep.findAll());
 		return "editorial";
 	}
+	@RequestMapping("/nuevaEditorial")
+	public String nuevaEditorial() {
+		return "nuevaEditorial";
+	}
+
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sd.demo.entity.Editorial;
 import com.sd.demo.entity.Libro;
@@ -19,10 +20,16 @@ public class InsertarController {
 	private EditorialRepository editRep;
 	
 	@RequestMapping("/insertar")
-	public String insertar(Libro libro,Editorial editorial,Model model) {
+	public String insertar(@RequestParam String edit,Libro libro, Model model) {
+		
+		Editorial e = editRep.findByNombre(edit);
+		libro.setEditorial(e);
 		libRep.save(libro);
-		editRep.save(editorial);
+		e.getLibros().add(libro);
+		editRep.save(e);
+
 		return "insertar";
+
 	}
 
 }

@@ -19,7 +19,7 @@ public class MostrarLibroController {
 	private LibroRepository libRep;
 	
 	@RequestMapping("/mostrarlibro")
-	public String mostrar(@RequestParam String titulo, @RequestParam String autor, @RequestParam Double precio,@RequestParam int numPaginas,@RequestParam String isbn,@RequestParam String categoria,@RequestParam Editorial edit, Model model) {
+	public String mostrar(@RequestParam String titulo, @RequestParam String autor, Model model) {
 		
 		List<Libro> varioslibros = libRep.findByTituloAndAutor(titulo, autor);
 		model.addAttribute("libros", varioslibros);

@@ -51,41 +51,24 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Añadir un nuevo libro a la librería</h1>
-							<form method="post" action="/insertar">
-					            <span>Autor:</span>
-					            <input type="text" name="Autor">
+							<form method="post" action="/insertarEditorial">
+        					
+        						<h1>Añade la información de su editorial:</h1>
+        					
+					            <span>Nombre:</span>
+					            <input type="text" name="nombre">
 					            <br>
-					            <span>Titulo:</span>
-					            <input type="text" name="Titulo">
+					            <span>Numero de telefono:</span>
+					            <input type="text" name="NumTelefono">
 					            <br>
-					            <span>Editorial:</span>
-								<select name="edit"> 
-									<option th:if= "editorial.id != null" th:each="editorial: ${editoriales}" th:value="${editorial.nombre}" th:text="${editorial.nombre}"></option>
-								</select> 
-								<a href="/nuevaEditorial">Registrar una nueva editorial</a>
-								<br>
-					            <span>Año de publicación:</span>
-					            <input type="text" name="Año">
+					            <span>Email:</span>
+					            <input type="text" name="Email">
 					            <br>
-					            <span>Numero de páginas:</span>
-					            <input type="text" name="NumPaginas">
+					            <span>Dirección postal:</span>
+					            <input type="text" name="DireccionPostal">
 					            <br>
-					            <span>ISBN</span>
-					            <input type="text" name="Isbn">
-					            <br>
-					            <span>Precio</span>
-					            <input type="text" name="Precio">
-					            <br>
-					            <span>Categoria</span>
-					            <select name="categoria">
-					                <option value="Educacion">Educacion</option>
-					                <option value="Misterio">Misterio</option>
-					                <option value="Ficcion">Ficcion</option>
-					                <option value="Juvenil">Juvenil</option>
-					                <option value="Guia">Guia</option>
-					                <option value="Novela">Novela</option>
-					            </select>
+					            <span>CodigoIF:</span>
+					            <input type="text" name="codigoIF">
 					            <br>
 					            <input type="submit">
         					</form>

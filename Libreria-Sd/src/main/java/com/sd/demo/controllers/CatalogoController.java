@@ -29,10 +29,10 @@ public class CatalogoController {
 		Editorial e3 = editRep.findByNombre("Booket");
 		Editorial e4 = editRep.findByNombre("Planeta");
 		
-		libRep.save(new Libro("Gabriel García Marquez","Cien años de soledad",e1,1967,481,"84-7735-786-2",23.65,"Novela"));
-		libRep.save(new Libro("Anne Frank","El diario de Ana Frank",e2,1947,217,"90-2564-852-1",30.54,"Juvenil"));
-		libRep.save(new Libro("Paulo Coelho","El alquimista",e3,1988,304,"72-2162-827-9",26.21,"Novela"));
-		libRep.save(new Libro("Dan Brown","El códiog Da Vinci",e4,2003,582,"67-9274-192-4",31.23,"Misterio"));
+		libRep.save(new Libro("Gabriel García Marquez","Cien años de soledad",1967,481,"84-7735-786-2",23.65,"Novela",e1));
+		libRep.save(new Libro("Anne Frank","El diario de Ana Frank",1947,217,"90-2564-852-1",30.54,"Juvenil",e2));
+		libRep.save(new Libro("Paulo Coelho","El alquimista",1988,304,"72-2162-827-9",26.21,"Novela",e3));
+		libRep.save(new Libro("Dan Brown","El código Da Vinci",2003,582,"67-9274-192-4",31.23,"Misterio",e4));
 	}
 	
 	@RequestMapping("/")

@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Nuevo libro</title>
+		<title>Libro insertado</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -41,8 +41,8 @@
 					<nav id="menu">
 						<h2>Menu</h2>
 						<ul>
-							<li><a href="/">Home</a></li>
-							<li><a href="/catalogo">Catálogo</a></li>
+							<li><a href="/">Inicio</a></li>
+							<li><a href="/catalogo">Catalogo</a></li>
 							<li><a href="/editorial">Editoriales</a></li>
 							<li><a href="/nuevoLibro">Añadir libro</a></li>
 						</ul>
@@ -51,44 +51,12 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Añadir un nuevo libro a la librería</h1>
-							<form method="post" action="/insertar">
-					            <span>Autor:</span>
-					            <input type="text" name="Autor">
-					            <br>
-					            <span>Titulo:</span>
-					            <input type="text" name="Titulo">
-					            <br>
-					            <span>Editorial:</span>
-								<select name="edit"> 
-									<option th:if= "editorial.id != null" th:each="editorial: ${editoriales}" th:value="${editorial.nombre}" th:text="${editorial.nombre}"></option>
-								</select> 
-								<a href="/nuevaEditorial">Registrar una nueva editorial</a>
-								<br>
-					            <span>Año de publicación:</span>
-					            <input type="text" name="Año">
-					            <br>
-					            <span>Numero de páginas:</span>
-					            <input type="text" name="NumPaginas">
-					            <br>
-					            <span>ISBN</span>
-					            <input type="text" name="Isbn">
-					            <br>
-					            <span>Precio</span>
-					            <input type="text" name="Precio">
-					            <br>
-					            <span>Categoria</span>
-					            <select name="categoria">
-					                <option value="Educacion">Educacion</option>
-					                <option value="Misterio">Misterio</option>
-					                <option value="Ficcion">Ficcion</option>
-					                <option value="Juvenil">Juvenil</option>
-					                <option value="Guia">Guia</option>
-					                <option value="Novela">Novela</option>
-					            </select>
-					            <br>
-					            <input type="submit">
-        					</form>
+							<h1>¡Editorial añadida con éxito!</h1>
+							<P>Haz click en el botón inferior en caso de que desees registrar un nuevo libro.</p>
+							<br>
+							<a href="/nuevoLibro">Registrar nuevo libro</a>
+							<br>
+							<a href="/">Volver</a>
 						</div>
 					</div>
 

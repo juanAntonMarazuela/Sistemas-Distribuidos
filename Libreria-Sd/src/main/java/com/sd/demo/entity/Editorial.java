@@ -1,6 +1,5 @@
 package com.sd.demo.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -16,7 +15,7 @@ public class Editorial {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Long ideditorial;
 	
 	private String nombre;
 	private int numTelefono;
@@ -25,7 +24,7 @@ public class Editorial {
 	private String codigoIF;
 	
 	@OneToMany(mappedBy="editorial")
-	private List<Libro> libros = new ArrayList<Libro>();
+	private List<Libro> libros;
 	
 	
 	public Editorial() {
@@ -80,4 +79,14 @@ public class Editorial {
 	public void setCodigoIF(String codigoIF) {
 		this.codigoIF = codigoIF;
 	}
+
+	public List<Libro> getLibros() {
+		return libros;
+	}
+
+	public void setLibros(List<Libro> libros) {
+		this.libros = libros;
+	}
+	
+	
 }
