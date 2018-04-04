@@ -16,7 +16,7 @@ public class Libro {
 
 	private String autor;
 	private String titulo;
-	private int añoPublicacion;
+	private int ano;
 	private int numPaginas;
 	private String isbn;
 	private double precio;
@@ -36,7 +36,7 @@ public class Libro {
 		this.autor = autor;
 		this.titulo = titulo;
 		this.editorial = editorial;
-		this.añoPublicacion = añoPublicacion;
+		this.ano = añoPublicacion;
 		this.numPaginas = numPaginas;
 		this.isbn = isbn;
 		this.precio = precio;
@@ -68,12 +68,12 @@ public class Libro {
 		this.editorial = editorial;
 	}
 
-	public int getAñoPublicacion() {
-		return añoPublicacion;
+	public int getAno() {
+		return ano;
 	}
 
-	public void setAñoPublicacion(int añoPublicacion) {
-		this.añoPublicacion = añoPublicacion;
+	public void setAno(int añoPublicacion) {
+		this.ano = añoPublicacion;
 	}
 
 	public int getNumPaginas() {
