@@ -70,7 +70,7 @@
 								<br>
 								<!-- <span th:text="'Editorial:' + ${${libro.editorial}.nombre}"/> -->
 								<br><br>
-								<a href="">Modificar libro</a>
+								<a th:href="@{'/libro/editar/' + ${libro.id}}">Modificar libro</a>
 								<br>
 								<a href="/">Volver</a>
 						</div>

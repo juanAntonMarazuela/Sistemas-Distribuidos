@@ -108,4 +108,8 @@ public class Libro {
 		this.categoria = categoria;
 	}
 	
+	public Long getId() {
+		return this.id;
+	}
+	
 }
