@@ -52,8 +52,8 @@
 					<div id="main">
 						<div class="inner">
 							<h1>Todos los libros</h1>
-								<p th:each="libro : ${libros}">
-									<a th:href="@{/mostrarlibro(autor=${libro.autor}, titulo=${libro.titulo}, ano=${libro.ano},numPaginas=${libro.numPaginas},isbn=${libro.isbn},precio=${libro.precio},categoria=${libro.categoria},edit=${libro.editorial})}" th:text="${libro.titulo}"></a>
+								<p th:each="libro,iter : ${libros}">
+									<a th:href="@{/mostrarlibro(autor=${libro.autor}, titulo=${libro.titulo}, ano=${libro.ano},numPaginas=${libro.numPaginas},isbn=${libro.isbn},precio=${libro.precio},categoria=${libro.categoria},edit=${libro.editorial})}" th:text="${iter.index} + '.- ' + ${libro.titulo}"></a>
 									<!-- <a th:text="${libro.autor}"></a> -->
 								</p>
 								

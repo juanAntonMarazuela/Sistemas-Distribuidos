@@ -52,8 +52,9 @@
 					<div id="main">
 						<div class="inner">
 							<h1>Lista de editoriales:</h1>
-						 	<p th:each="editorial : ${editoriales}">
-								<a th:href="@{/mostrareditorial(nombre=${editorial.nombre}, email=${editorial.email}, numTelefono=${editorial.numTelefono},direccionPostal=${editorial.direccionPostal},codigoIF=${editorial.codigoIF})}" th:text="${editorial.nombre}"></a>
+						 	<p th:each="editorial,iter : ${editoriales}">
+								<a th:href="@{/mostrareditorial(nombre=${editorial.nombre}, email=${editorial.email}, numTelefono=${editorial.numTelefono},direccionPostal=${editorial.direccionPostal},codigoIF=${editorial.codigoIF})}" th:text="${iter.index} + '.- ' + ${editorial.nombre}">
+								</a>
 							</p> 
 						</div>
 					</div>
