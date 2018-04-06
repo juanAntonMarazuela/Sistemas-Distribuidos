@@ -81,13 +81,11 @@
 					            <br>
                                 <br>
 					            <span>ISBN</span>
-                                <br>
-					            <input type="number" name="Isbn" th:value="${libro.isbn}" required minlength="1">
+					            <input type="text" name="Isbn" th:value="${libro.isbn}" required minlength="1">
 					            <br>
-                                <br>
 					            <span>Precio</span>
                                 <br>
-					            <input type="number" name="Precio" th:value="${libro.precio}" required minlength="1">
+					            <input type="number" name="Precio" th:value="${libro.precio}" required minlength="1" min="0" step="0.01">
                                 <br>
 					            <br>
 					            <span>Categoria</span>
@@ -104,7 +102,7 @@
                                     <span class = "col-5" ><input type="submit" value="enviar" name="send"> </span>
 					               
                                     <span class="offset-5 col-3"> <a class="btn btn-primary" th:href="@{/mostrarlibro(autor=${libro.autor}, titulo=${libro.titulo}, ano=${libro.ano},numPaginas=${libro.numPaginas},isbn=${libro.isbn},precio=${libro.precio},categoria=${libro.categoria},edit=${libro.editorial})}">Volver</a> </span>
-                                    <span class="offset-3 col-3"> <a href="/catalogo">Catalogo</a> </span>
+                                    <span class="offset-3 col-3"> <a class="btn btn-primary" href="/catalogo">Catalogo</a> </span>
                                 </div>
         					</form>
 						</div>

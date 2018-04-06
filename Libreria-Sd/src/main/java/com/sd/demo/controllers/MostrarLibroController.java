@@ -22,6 +22,7 @@ public class MostrarLibroController {
 	public String mostrar(@RequestParam String titulo, @RequestParam String autor, Model model) {
 		
 		List<Libro> varioslibros = libRep.findByTituloAndAutor(titulo, autor);
+		
 		model.addAttribute("libros", varioslibros);
 		return "libro";
 	}

@@ -1,5 +1,6 @@
 package com.sd.demo.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class Editorial {
 	private String codigoIF;
 	
 	@OneToMany(mappedBy="editorial")
-	private List<Libro> libros;
+	private List<Libro> libros = new ArrayList<>();
 	
 	
 	public Editorial() {

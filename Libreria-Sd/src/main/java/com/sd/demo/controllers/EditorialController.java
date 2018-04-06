@@ -15,14 +15,6 @@ public class EditorialController {
 	@Autowired
 	EditorialRepository editRep;
 	
-	@PostConstruct
-	public void init() {
-		editRep.save(new Editorial("Editorial Sudamericana",612345623,"esudamericana@gmail.com","Plaza Bolívar","14785"));
-		editRep.save(new Editorial("DeBolsillo",721521632,"debolsillo@gmail.com","Principe pio","25789"));
-		editRep.save(new Editorial("Booket",612983512,"booket@gmail.com","Callao","71273"));
-		editRep.save(new Editorial("Planeta",632839182,"planeta@gmail.com","Castellana","71829"));
-	}
-	
 	@RequestMapping("/insertarEditorial")
 	public String insertarEditorial(Editorial editorial, Model model) {
 		editRep.save(editorial);
