@@ -54,10 +54,10 @@
 							<h1>Añadir un nuevo libro a la librería</h1>
 							<form method="post" action="/insertar">
 					            <span>Autor:</span>
-					            <input type="text" name="Autor">
+					            <input type="text" name="Autor" required minlength="1">
 					            <br>
 					            <span>Titulo:</span>
-					            <input type="text" name="Titulo">
+					            <input type="text" name="Titulo" required minlength="1">
 					            <br>
 					            <span>Editorial:</span>
 								<select name="edit"> 
@@ -66,16 +66,16 @@
 								<a href="/nuevaEditorial">Registrar una nueva editorial</a>
 								<br>
 					            <span>Año de publicación:</span>
-					            <input type="text" name="ano">
+					            <input type="number" name="ano" required minlength="1">
 					            <br>
 					            <span>Numero de páginas:</span>
-					            <input type="text" name="NumPaginas">
+					            <input type="number" name="NumPaginas" required minlength="1">
 					            <br>
 					            <span>ISBN</span>
-					            <input type="text" name="Isbn">
+					            <input type="text" name="Isbn" required minlength="1">
 					            <br>
 					            <span>Precio</span>
-					            <input type="text" name="Precio">
+					            <input type="number" name="Precio" required minlength="1">
 					            <br>
 					            <span>Categoria</span>
 					            <select name="categoria">
