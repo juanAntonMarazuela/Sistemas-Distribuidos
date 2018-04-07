@@ -62,22 +62,23 @@ public class CatalogoController {
 		return "index";
 	}
 	@RequestMapping("/catalogo")
-	public String catalogo(Model model,  @RequestParam(defaultValue = "titulo") String sort) {
+	public String catalogo(Model model,  @RequestParam(defaultValue = "titulo") String sort, @RequestParam(defaultValue = "asc") String ord) {
 		
 		List<Libro> respLibros = new ArrayList<>();
 		switch (sort) {
 		case "autor":
-			respLibros = libRep.findAllByOrderByAutorAsc();
+			respLibros = ord.equals("asc") ? libRep.findAllByOrderByAutorAsc() : libRep.findAllByOrderByAutorDesc(); 
 			break;
 		case "editorial":
-			respLibros = libRep.findAllByOrderByEditorialAsc();
+			respLibros = ord.equals("asc") ? libRep.findAllByOrderByEditorialAsc() : libRep.findAllByOrderByEditorialDesc();
 			break;
 		case "titulo":
-			respLibros = libRep.findAllByOrderByTituloAsc();
+			respLibros = ord.equals("asc") ? libRep.findAllByOrderByTituloAsc() : libRep.findAllByOrderByTituloDesc();
 			break;
 		}
 		model.addAttribute("libros",respLibros);
 		model.addAttribute("sorting", sort);
+		model.addAttribute("order" , ord);
 		return "catalogo";
 	}
 

@@ -57,18 +57,27 @@
 							<div class = "row" >
 								<h1 class = "pl-0 col-4">Todos los libros</h1>
 							
-						 		<span class = "col-2">Ordenar por: </span>
-						 		<span class = "col-1">
+						 		<span class = "col-2 py-2">Ordenar por: </span>
+						 		<span class = "col-2 py-2">
 						 			<a  th:text = "Titulo"  th:unless="${sorting == 'titulo'}"  th:href= "@{/catalogo(sort='titulo')}"> </a>
-						 			<span class = "selectedLink border border-dark rounded p-1" th:if="${sorting == 'titulo'}"> Titulo </span>
+						 			<span class = "selectedLink border border-dark rounded p-2" th:if="${sorting == 'titulo'}">
+						 				<a th:text = "'Titulo ▲'" th:if="${order == 'asc'}" th:href= "@{/catalogo(sort='titulo', ord='desc')}"></a>
+						 			  	<a th:text = "'Titulo ▼'" th:unless="${order == 'asc'}" th:href= "@{/catalogo(sort='titulo', ord='asc')}"></a>
+						 			 </span>
 						 		</span>
-						 		<span class = "col-1">
+						 		<span class = "col-2 py-2">
 						 			<a  th:text = "Autor"  th:unless="${sorting == 'autor'}"  th:href= "@{/catalogo(sort='autor')}"> </a>
-						 			<span class = "selectedLink border border-dark rounded p-1" th:if="${sorting == 'autor'}"> Autor </span>
+						 			<span class = "selectedLink border border-dark rounded p-1" th:if="${sorting == 'autor'}"> 
+										<a th:text = "'Autor ▲'" th:if="${order == 'asc'}" th:href= "@{/catalogo(sort='autor', ord='desc')}"></a>
+						 			  	<a th:text = "'Autor ▼'" th:unless="${order == 'asc'}" th:href= "@{/catalogo(sort='autor', ord='asc')}"></a>
+									</span>
 						 		</span>
-						 		<span class = "col-1">
+						 		<span class = "col-2 py-2">
 						 			<a  th:text = "Editorial"  th:unless="${sorting == 'editorial'}"  th:href= "@{/catalogo(sort='editorial')}"> </a>
-						 			<span class = "selectedLink border border-dark rounded p-1" th:if="${sorting == 'editorial'}"> Editorial </span>
+						 			<span class = "selectedLink border border-dark rounded p-1" th:if="${sorting == 'editorial'}">
+						 				<a th:text = "'Editorial ▲'" th:if="${order == 'asc'}" th:href= "@{/catalogo(sort='editorial', ord='desc')}"></a>
+						 			  	<a th:text = "'Editorial ▼'" th:unless="${order == 'asc'}" th:href= "@{/catalogo(sort='editorial', ord='asc')}"></a>
+						 			</span>
 						 		
 						 		</span>
 							 </div>
