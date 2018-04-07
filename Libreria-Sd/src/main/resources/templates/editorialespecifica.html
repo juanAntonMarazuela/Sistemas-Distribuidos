@@ -63,7 +63,7 @@
 								<br>
 								<span th:text="'CódigoIF: ' + ${editorial.codigoIF}"/> 
 								<br><br>
-								<a href="">Modificar editorial</a>
+								<a th:href="@{'/editorial/editar/' + ${editorial.ideditorial}}">Modificar editorial</a>
 								<br>
 								<a href="/">Volver</a>
 						</div>
