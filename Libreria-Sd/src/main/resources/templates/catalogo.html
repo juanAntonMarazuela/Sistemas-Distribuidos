@@ -10,7 +10,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
@@ -51,23 +52,43 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Todos los libros</h1>
-								<p th:each="libro,iter : ${libros}">
-									<a th:href="@{/mostrarlibro(autor=${libro.autor}, titulo=${libro.titulo}, ano=${libro.ano},numPaginas=${libro.numPaginas},isbn=${libro.isbn},precio=${libro.precio},categoria=${libro.categoria},edit=${libro.editorial})}" th:text="${iter.index} + '.- ' + ${libro.titulo}"></a>
-									<!-- <a th:text="${libro.autor}"></a> -->
+						
+						<div class = "container-fluid" >
+							<div class = "row" >
+								<h1 class = "pl-0 col-4">Todos los libros</h1>
+							
+						 		<span class = "col-2">Ordenar por: </span>
+						 		<span class = "col-1">
+						 			<a  th:text = "Titulo"  th:unless="${sorting == 'titulo'}"  th:href= "@{/catalogo(sort='titulo')}"> </a>
+						 			<span class = "selectedLink border border-dark rounded p-1" th:if="${sorting == 'titulo'}"> Titulo </span>
+						 		</span>
+						 		<span class = "col-1">
+						 			<a  th:text = "Autor"  th:unless="${sorting == 'autor'}"  th:href= "@{/catalogo(sort='autor')}"> </a>
+						 			<span class = "selectedLink border border-dark rounded p-1" th:if="${sorting == 'autor'}"> Autor </span>
+						 		</span>
+						 		<span class = "col-1">
+						 			<a  th:text = "Editorial"  th:unless="${sorting == 'editorial'}"  th:href= "@{/catalogo(sort='editorial')}"> </a>
+						 			<span class = "selectedLink border border-dark rounded p-1" th:if="${sorting == 'editorial'}"> Editorial </span>
+						 		
+						 		</span>
+							 </div>
+							 </div>
+							
+								<p  th:each="libro,iter : ${libros}">		
+								<span class = "row" >
+										<span class = "col-3"> 
+											<a  th:href="@{/mostrarlibro(autor=${libro.autor}, titulo=${libro.titulo}, ano=${libro.ano},numPaginas=${libro.numPaginas},isbn=${libro.isbn},precio=${libro.precio},categoria=${libro.categoria},edit=${libro.editorial})}" th:text="${iter.index} + '.- Titulo: ' + ${libro.titulo}"></a>
+										</span>
+										<span class = "col-3">
+											<span  th:text = "' Autor: ' +${libro.autor}"> </span>
+										</span>	
+										<span class = "col">
+											<a  th:text = "'Editorial: ' + ${libro.editorial.nombre}"  th:href="@{/mostrareditorial(nombre=${libro.editorial.nombre}, email=${libro.editorial.email}, numTelefono=${libro.editorial.numTelefono},direccionPostal=${libro.editorial.direccionPostal},codigoIF=${libro.editorial.codigoIF})}">  </a>
+										</span>
+									</span>
 								</p>
 								
-							
-							<!--  
-							<p th:each="libro: ${libros}">
-							<span th:text="'Titulo:'+${libro.titulo}"/><br>
-							<span th:text="'Autor:' +${libro.autor}"/><br>
-							-->
-							<!--
-							<a th:href="@{/libro(id=${libro.id})}">Ver</a>
-							-->
-							</p>
-						</div>
+							</div>
 					</div>
 
 				<!-- Footer -->
@@ -112,11 +133,12 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+			<script src="/assets/js/main.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 	</body>
 </html>

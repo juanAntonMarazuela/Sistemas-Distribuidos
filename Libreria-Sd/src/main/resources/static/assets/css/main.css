@@ -47,6 +47,13 @@
 	body {
 		-webkit-text-size-adjust: none;
 	}
+	
+	.selectedLink {
+		font-size : 1.1em;
+		background-color : rgba(30, 150, 200, 0.4);
+		border-color : rgb(0, 0, 0);
+		border-size : 5px;
+	}
 
 /* Box Model */
 
@@ -3362,3 +3369,4 @@
 			}
 
 		}
+		

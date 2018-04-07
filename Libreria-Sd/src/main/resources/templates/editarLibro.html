@@ -10,9 +10,11 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+		
 	</head>
 	<body>
 		<!-- Wrapper -->
@@ -99,11 +101,11 @@
 					            </select>
 					            <br>
                                 <div class="row">
-                                    <span class = "col-5" ><input type="submit" value="enviar" name="send"> </span>
+                                    <span class = "col-2" ><input type="submit" value="enviar" name="send"> </span>
 					               
-                                    <span class="offset-5 col-3"> <a class="btn btn-primary" th:href="@{/mostrarlibro(autor=${libro.autor}, titulo=${libro.titulo}, ano=${libro.ano},numPaginas=${libro.numPaginas},isbn=${libro.isbn},precio=${libro.precio},categoria=${libro.categoria},edit=${libro.editorial})}">Volver</a> </span>
-                                    <span class="offset-3 col-3"> <a class="btn btn-primary" href="/catalogo">Catalogo</a> </span>
-                                </div>
+                                    <span class="col-2"> <a class="btn" th:href="@{/mostrarlibro(autor=${libro.autor}, titulo=${libro.titulo}, ano=${libro.ano},numPaginas=${libro.numPaginas},isbn=${libro.isbn},precio=${libro.precio},categoria=${libro.categoria},edit=${libro.editorial})}">Volver</a> </span>
+                                    <span class="offset-6 col-2"> <a class="btn" href="/catalogo">Catalogo</a> </span>
+                                 </div>
         					</form>
 						</div>
 					</div>
@@ -155,6 +157,7 @@
 			<script src="/assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="/assets/js/main.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 	</body>
 </html>

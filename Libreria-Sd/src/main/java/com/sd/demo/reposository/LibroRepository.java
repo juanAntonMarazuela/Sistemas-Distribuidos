@@ -13,5 +13,9 @@ public interface LibroRepository extends JpaRepository<Libro, Long>{
 	Libro findByAutor(String autor);
 	List<Libro> findByTituloAndAutor(String titulo, String autor);
 	List<Libro> findByEditorial(Editorial editorial);
+	
+	List<Libro> findAllByOrderByAutorAsc();
+	List<Libro> findAllByOrderByEditorialAsc();
+	List<Libro> findAllByOrderByTituloAsc();
 
 }

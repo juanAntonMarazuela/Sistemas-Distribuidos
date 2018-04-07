@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sd.demo.entity.Editorial;
 import com.sd.demo.entity.Libro;
@@ -61,8 +62,22 @@ public class CatalogoController {
 		return "index";
 	}
 	@RequestMapping("/catalogo")
-	public String catalogo(Model model) {		
-		model.addAttribute("libros",libRep.findAll());
+	public String catalogo(Model model,  @RequestParam(defaultValue = "titulo") String sort) {
+		
+		List<Libro> respLibros = new ArrayList<>();
+		switch (sort) {
+		case "autor":
+			respLibros = libRep.findAllByOrderByAutorAsc();
+			break;
+		case "editorial":
+			respLibros = libRep.findAllByOrderByEditorialAsc();
+			break;
+		case "titulo":
+			respLibros = libRep.findAllByOrderByTituloAsc();
+			break;
+		}
+		model.addAttribute("libros",respLibros);
+		model.addAttribute("sorting", sort);
 		return "catalogo";
 	}
 
