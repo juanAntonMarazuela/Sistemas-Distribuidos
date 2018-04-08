@@ -58,7 +58,7 @@
                                 <h2> ¡La editorial se ha actualizado con exito! </h2>
                             </div>
                             
-							<form method="post" th:action="@{'/editorial/editar/' + ${editorial.id}}" >
+							<form method="post" th:action="@{'/editorial/editar/' + ${editorial.ideditorial}}" >
 					            <span>Nombre:</span>
 					            <input type="text" name="Nombre" th:value="${editorial.nombre}" required  minlength="1" >
 					            <br>
