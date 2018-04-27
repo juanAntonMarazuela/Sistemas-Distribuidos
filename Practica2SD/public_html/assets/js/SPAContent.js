@@ -18,7 +18,7 @@ const htmlIndex = `
                             <div class="inner">
                                     <h3>Busqueda por Tags</h3>
                                     <p>Búsqueda por posibilidad de etiquetas</p>
-                                    <a id ="busquedaTags" class="button style2">Buscar</a>
+                                    <a  class="button style2 busquedaBtn" value="tag">Buscar</a>
                             </div>
                     </div>
 
@@ -62,25 +62,41 @@ const htmlIndex = `
             </div>
 `;
 
-const buscarPorTagsHtml = `
+const tagsForm = `
 <div class="inner">
                 <h2>Fotos por un tag especifico</h2>
                 <div class="formu">
                     <h3>Introduce el tag para las fotos que quieres buscar:</h3>
-                    <input type="text" value="Prueba" id="tag">
+                    <input type="text" value="Prueba" id="inputData">
                     <br>
                     <h3>Pulsa el boton para buscar</h3>
                     <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
-                <h3>Fotos</h3>
-                <div id="imagenes">
-                    
+`;
+
+const MinDateForm = `
+<div class="inner">
+                <h2>Fotos a partir de una fecha</h2>
+                <div class="formu">
+                    <h3>Selecciona la fecha a partir de la que quieres buscar:</h3>
+                    <input class ="calendar" type="date" id="inputData">
+                    <br>
+                    <h3>Pulsa el boton para buscar</h3>
+                    <input type="submit" value="Enviar" id="enviar">
                 </div>
-                <a href="tags.html">Buscar por otra etiqueta</a>
-                <br>
-                <a id ="botonIndex" >Volver a Inicio</a>
-            </div>
+                <br><br>
+`;
+
+const restPageHtml = `
+        <h3>Fotos</h3>
+        <div id="imagenes">
+            
+        </div>
+        <a id ="buscarPorOtraEtiqueta">Cambiar parametros de busqueda</a>
+        <br>
+        <a id ="botonIndex" >Volver a Inicio</a>
+    </div>
 `;
 
 const busquedaCriterioHtml = `
@@ -90,31 +106,27 @@ const busquedaCriterioHtml = `
                     
                 </div>
             </div>
-`; 
+`;
 
 /* Funcion que se ejecuta al cargar la pagina*/
 $(changeContent("index"));
 
 function changeContent(page, aditionalInfo) {
 
-    switch (page){
-        case "index" : {
+    switch (page) {
+        case "index": {
             generateIndexPage();
             break;
         };
-        case  "buscarPorTags" : {
-            generateBusquedaTagsPage();
-            break;
-        };
 
-        case "busqueda" : {
-            generateBusquedaCriterio (aditionalInfo);
+        case "busqueda": {
+            generateBusquedaCriterio(aditionalInfo);
             break;
         }
 
-        case "imagenConcreta" : {
-            generateImagenConcreta (aditionalInfo);
-            break; 
+        case "imagenConcreta": {
+            generateImagenConcreta(aditionalInfo);
+            break;
         }
 
     }
@@ -122,64 +134,65 @@ function changeContent(page, aditionalInfo) {
 }
 
 
-function generateIndexPage () {
+function generateIndexPage() {
     $('#main').append().html(htmlIndex);
 
     /* Events */
     $('.busquedaBtn').each(function () {
         console.log("Iterated");
         $(this).click(function () {
-            console.log("clicked");
-            busqueda($(this).attr('value'));
+            changeContent("busqueda", $(this).attr('value'));
         });
     });
-
-
-    /* La busqueda por tags va aparte */
-    $('#busquedaTags').click(function () {
-        changeContent("buscarPorTags");
-    });
-
-
 }
 
-function generateBusquedaTagsPage() {
-    $('#main').append().html(buscarPorTagsHtml);
+function generateBusquedaCriterio(criterio) {
+    let form;
+    let search;
+    switch (criterio) {
+        case "tag" : {
+            form = tagsForm;
+            search = 'tags=' 
+            break;
+        }
+        case "fechaMinima" : {
+            form = MinDateForm;
+            search = 'min_taken_date=' 
+            break;
+        }
+    }
 
+    $('#main').append().html(form + restPageHtml);
 
-    /* Events */
-
-    var tag;
-
-    
-    $("#enviar").click(function(){
-        tag = document.getElementById('tag').value;
-        $.getJSON('https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key=' 
-             + api_key + '&user_id=' +user_id + '&tags=' + tag +
+    $("#enviar").click(function () {
+        searchData = document.getElementById('inputData').value;
+        $.getJSON('https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key='
+            + api_key + '&user_id=' + user_id + '&' + search + searchData +
             '&format=json&nojsoncallback=1',
             mostrar_fotos
         );
-    });	
+    });
+
+
+    $('#buscarPorOtraEtiqueta').click(function () {
+        generateBusquedaCriterio(criterio);
+    })
 
     $('#botonIndex').click(function () {
         changeContent("index");
-    })    
+    })
+
 }
 
-
-function busqueda(value) {
-   console.log(value);
-}
-
-function mostrar_fotos(info){
+function mostrar_fotos(info) {
     var i;
-    for (i=0;i<info.photos.photo.length;i++) {
-       var item = info.photos.photo[i];
-       var url = 'https://farm'+item.farm+".staticflickr.com/"+item.server
-                      +'/'+item.id+'_'+item.secret+'_m.jpg';
-       console.debug(url);
-       $("#imagenes").append($("<img/>").attr("src",url));
-       $("#imagenes").append($("<p> Etiqueta = "+tag+"</p>"));
+    for (i = 0; i < info.photos.photo.length; i++) {
+        var item = info.photos.photo[i];
+        var url = 'https://farm' + item.farm + ".staticflickr.com/" + item.server
+            + '/' + item.id + '_' + item.secret + '_m.jpg';
+        console.debug(url);
+        $("#imagenes").append($("<img/>").attr("src", url));
+        $("#imagenes").append($("<p> Busqueda = " + $('#inputData').val() + "</p>"));
     }
     $('div.formu').slideUp(1000);
 }
