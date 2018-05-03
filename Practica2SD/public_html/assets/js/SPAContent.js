@@ -5,7 +5,7 @@ const htmlIndex = `
                 <div class="thumbnails">
 
                     <div class="box">
-                            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/fecha.jpe" alt="" /></a>
+                            <a class="image fit"><img src="images/fecha.jpe" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #1</h3>
                                     <p>Búsqueda por fecha mínima de captura</p>
@@ -14,7 +14,7 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/tag.jpg" alt="" /></a>
+                            <a class="image fit"><img src="images/tag.jpg" alt="" /></a>
                             <div class="inner">
                                     <h3>Busqueda por Tags</h3>
                                     <p>Búsqueda por posibilidad de etiquetas</p>
@@ -23,7 +23,7 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/licencia.png" alt="" /></a>
+                            <a  class="image fit"><img src="images/licencia.png" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #3</h3>
                                     <p>Búsqueda por licencia</p>
@@ -32,29 +32,29 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+                            <a class="image fit"><img src="images/pic04.jpg" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #4</h3>
                                     <p>Explicación de la opción de búsqueda #4</p>
-                                    <a href="https://youtu.be/s6zR2T9vn2c" class="button style2 fit" data-poptrox="youtube,800x400">Buscar</a>
+                                    <a class="button style2 fit"  >Buscar</a>
                             </div>
                     </div>
 
                     <div class="box">
-                            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+                            <a class="image fit"><img src="images/pic05.jpg" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #5</h3>
                                     <p>Explicación de la opción de búsqueda #5</p>
-                                    <a href="https://youtu.be/s6zR2T9vn2c" class="button style3 fit" data-poptrox="youtube,800x400">Buscar</a>
+                                    <a class="button style3 fit"  >Buscar</a>
                             </div>
                     </div>
 
                     <div class="box">
-                            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+                            <a class="image fit"><img src="images/pic06.jpg" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #6</h3>
                                     <p>Explicación de la opción de búsqueda #6</p>
-                                    <a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Buscar</a>
+                                    <a class="button fit"  >Buscar</a>
                             </div>
                     </div>
                     
