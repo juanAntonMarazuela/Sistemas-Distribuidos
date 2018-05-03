@@ -23,11 +23,11 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+                            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/licencia.png" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #3</h3>
-                                    <p>Explicación de la opción de búsqueda #3</p>
-                                    <a class="button style3 fit busquedaBtn" value ="Busqueda3" >Buscar</a>
+                                    <p>Búsqueda por licencia</p>
+                                    <a class="button style3 fit busquedaBtn" value ="license" >Buscar</a>
                             </div>
                     </div>
 
@@ -86,6 +86,30 @@ const MinDateForm = `
                     <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
+`;
+
+const LicenseForm = `
+            <div class="inner">
+                <h2>Fotos a partir de una licencia</h2>
+                <div class="formu">
+                    <h3>Selecciona la licencia de las fotos que quieres buscar:</h3>
+                    <select id="inputData">
+                        <option value="0">Todos los derechos reservados</option>
+                        <option value="10">Obra de dominio público</option>
+                        <option value="9">Dedicatoria al dominio público</option>
+                        <option value="4">Atribución</option>
+                        <option value="5">Atribución-CompartirIgual</option>
+                        <option value="6">Atribución-SinDerivadas</option>
+                        <option value="2">Atribución-NoComercial</option>
+                        <option value="1">Atribución-NoComercial-CompartirIgual</option>
+                        <option value="3">Atribución-NoComercial-SinDerivadas</option>
+                    </select>
+                    <br>
+                    <h3>Pulsa el boton para buscar</h3>
+                    <input type="submit" value="Enviar" id="enviar">
+                </div>
+                <br><br>
+            </div>
 `;
 
 const restPageHtml = `
@@ -158,6 +182,11 @@ function generateBusquedaCriterio(criterio) {
         case "fechaMinima" : {
             form = MinDateForm;
             search = 'min_taken_date=' 
+            break;
+        }
+        case "license" : {
+            form = LicenseForm;
+            search = 'license='
             break;
         }
     }
