@@ -109,7 +109,7 @@ const LicenseForm = `
                     <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
-            </div>
+            
 `;
 
 const restPageHtml = `
@@ -130,6 +130,21 @@ const busquedaCriterioHtml = `
                     
                 </div>
             </div>
+`;
+
+
+
+
+
+const imagenConcretaHtml = `
+<div class="inner">
+                <h2>Fotos a partir de una fecha</h2>
+                <img id ="imageReceptor">
+                    
+                
+                <br><br>
+                <a id ="botonIndex" >Volver a Inicio</a>
+    </div>
 `;
 
 /* Funcion que se ejecuta al cargar la pagina*/
@@ -174,17 +189,17 @@ function generateBusquedaCriterio(criterio) {
     let form;
     let search;
     switch (criterio) {
-        case "tag" : {
+        case "tag": {
             form = tagsForm;
-            search = 'tags=' 
+            search = 'tags='
             break;
         }
-        case "fechaMinima" : {
+        case "fechaMinima": {
             form = MinDateForm;
-            search = 'min_taken_date=' 
+            search = 'min_taken_date='
             break;
         }
-        case "license" : {
+        case "license": {
             form = LicenseForm;
             search = 'license='
             break;
@@ -213,18 +228,41 @@ function generateBusquedaCriterio(criterio) {
 
 }
 
+function generateImagenConcreta (url) {
+
+    $('#main').append().html(imagenConcretaHtml);
+
+    $('#imageReceptor').attr("src", url + '_b.jpg')
+
+    $('#botonIndex').click(function () {
+        changeContent("index");
+    })
+}
+
 function mostrar_fotos(info) {
     var i;
+    let urls =  [];
     for (i = 0; i < info.photos.photo.length; i++) {
         var item = info.photos.photo[i];
         var url = 'https://farm' + item.farm + ".staticflickr.com/" + item.server
-            + '/' + item.id + '_' + item.secret + '_m.jpg';
-        console.debug(url);
-        $("#imagenes").append($("<img/>").attr("src", url));
+            + '/' + item.id + '_' + item.secret;
+        urls.push(url);
+        $("#imagenes").append($("<img/>").attr( {"src" : url + '_m.jpg', "id" : i}).click(function () {
+            let j = $(this).attr('id');
+            changeContent("imagenConcreta", urls[j]);
+        }));
+        
         $("#imagenes").append($("<p> Busqueda = " + $('#inputData').val() + "</p>"));
     }
     $('div.formu').slideUp(1000);
 }
+
+
+
+
+
+
+
 
 
 
