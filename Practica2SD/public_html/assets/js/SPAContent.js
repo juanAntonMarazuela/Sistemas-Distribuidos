@@ -117,9 +117,9 @@ const restPageHtml = `
         <div id="imagenes">
             
         </div>
-        <a id ="buscarPorOtraEtiqueta">Cambiar parametros de busqueda</a>
+        <a class ="link" id ="buscarPorOtraEtiqueta">Cambiar parametros de busqueda</a>
         <br>
-        <a id ="botonIndex" >Volver a Inicio</a>
+        <a class ="link" id ="botonIndex" >Volver a Inicio</a>
     </div>
 `;
 
@@ -143,7 +143,7 @@ const imagenConcretaHtml = `
                     
                 
                 <br><br>
-                <a id ="botonIndex" >Volver a Inicio</a>
+                <a class ="link" id ="botonIndex" >Volver a Inicio</a>
     </div>
 `;
 
@@ -228,7 +228,7 @@ function generateBusquedaCriterio(criterio) {
 
 }
 
-function generateImagenConcreta (url) {
+function generateImagenConcreta(url) {
 
     $('#main').append().html(imagenConcretaHtml);
 
@@ -241,18 +241,22 @@ function generateImagenConcreta (url) {
 
 function mostrar_fotos(info) {
     var i;
-    let urls =  [];
-    for (i = 0; i < info.photos.photo.length; i++) {
-        var item = info.photos.photo[i];
-        var url = 'https://farm' + item.farm + ".staticflickr.com/" + item.server
-            + '/' + item.id + '_' + item.secret;
-        urls.push(url);
-        $("#imagenes").append($("<img/>").attr( {"src" : url + '_m.jpg', "id" : i}).click(function () {
-            let j = $(this).attr('id');
-            changeContent("imagenConcreta", urls[j]);
-        }));
-        
-        $("#imagenes").append($("<p> Busqueda = " + $('#inputData').val() + "</p>"));
+    let urls = [];
+    if (info.photos.photo.length == 0) {
+        $("#imagenes").append().html(`<h3> No hay fotos que coincidan con los parametros de busqueda </h3>`);
+    } else {
+        for (i = 0; i < info.photos.photo.length; i++) {
+            var item = info.photos.photo[i];
+            var url = 'https://farm' + item.farm + ".staticflickr.com/" + item.server
+                + '/' + item.id + '_' + item.secret;
+            urls.push(url);
+            $("#imagenes").append($("<img/>").attr({ "src": url + '_m.jpg', "id": i }).click(function () {
+                let j = $(this).attr('id');
+                changeContent("imagenConcreta", urls[j]);
+            }).addClass("link"));
+
+            $("#imagenes").append($("<p> Busqueda = " + $('#inputData').val() + "</p>"));
+        }
     }
     $('div.formu').slideUp(1000);
 }

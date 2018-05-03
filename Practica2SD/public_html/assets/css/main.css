@@ -1409,3 +1409,11 @@
 		.calendar {
 			color: black;
 		}
+
+		select {
+			background-color:  #1b1b1f;
+		}
+
+		.link {
+			cursor: pointer;
+		}
