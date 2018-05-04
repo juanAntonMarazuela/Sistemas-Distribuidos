@@ -7,8 +7,7 @@ const htmlIndex = `
                     <div class="box">
                             <a class="image fit"><img src="images/fecha.jpe" alt="" /></a>
                             <div class="inner">
-                                    <h3>Opción de búsqueda #1</h3>
-                                    <p>Búsqueda por fecha mínima de captura</p>
+                                    <h3>Opción de búsqueda por fecha mínima de captura</h3>
                                     <a class="button fit busquedaBtn" value ="fechaMinima" >Buscar</a>
                             </div>
                     </div>
@@ -16,8 +15,7 @@ const htmlIndex = `
                     <div class="box">
                             <a class="image fit"><img src="images/tag.jpg" alt="" /></a>
                             <div class="inner">
-                                    <h3>Busqueda por Tags</h3>
-                                    <p>Búsqueda por posibilidad de etiquetas</p>
+                                    <h3>Opción de búsqueda por etiquetas asignadas</h3>
                                     <a  class="button style2 busquedaBtn" value="tag">Buscar</a>
                             </div>
                     </div>
@@ -25,8 +23,7 @@ const htmlIndex = `
                     <div class="box">
                             <a  class="image fit"><img src="images/licencia.png" alt="" /></a>
                             <div class="inner">
-                                    <h3>Opción de búsqueda #3</h3>
-                                    <p>Búsqueda por licencia</p>
+                                    <h3>Opción de búsqueda por licencia que posee la imagen</h3>
                                     <a class="button style3 fit busquedaBtn" value ="license" >Buscar</a>
                             </div>
                     </div>
@@ -34,8 +31,7 @@ const htmlIndex = `
                     <div class="box">
                             <a class="image fit"><img src="images/pic04.jpg" alt="" /></a>
                             <div class="inner">
-                                    <h3>Opción de búsqueda #4</h3>
-                                    <p>Búsqueda por tamaño</p>
+                                    <h3>Opción de búsqueda por tamaño de la imagen</h3>
                                     <a class="button style4 fit busquedaBtn" value ="size" >Buscar</a>
                             </div>
                     </div>
@@ -44,7 +40,6 @@ const htmlIndex = `
                             <a class="image fit"><img src="images/pic05.jpg" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #5</h3>
-                                    <p>Explicación de la opción de búsqueda #5</p>
                                     <a class="button style3 fit"  >Buscar</a>
                             </div>
                     </div>
@@ -53,7 +48,6 @@ const htmlIndex = `
                             <a class="image fit"><img src="images/pic06.jpg" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #6</h3>
-                                    <p>Explicación de la opción de búsqueda #6</p>
                                     <a class="button fit"  >Buscar</a>
                             </div>
                     </div>
@@ -64,7 +58,7 @@ const htmlIndex = `
 
 const tagsForm = `
 <div class="inner">
-                <h2>Fotos por un tag especifico</h2>
+                <h2 class="tituloBusq">Fotos por un tag especifico</h2>
                 <div class="formu">
                     <h3>Introduce el tag para las fotos que quieres buscar:</h3>
                     <input type="text" value="Prueba" id="inputData">
@@ -77,11 +71,11 @@ const tagsForm = `
 
 const MinDateForm = `
 <div class="inner">
-                <h2>Fotos a partir de una fecha</h2>
+                <h2 class="tituloBusq">Fotos a partir de una fecha</h2>
                 <div class="formu">
                     <h3>Selecciona la fecha a partir de la que quieres buscar:</h3>
                     <input class ="calendar" type="date" id="inputData">
-                    <br>
+                    <br><br>
                     <h3>Pulsa el boton para buscar</h3>
                     <input type="submit" value="Enviar" id="enviar">
                 </div>
@@ -90,7 +84,7 @@ const MinDateForm = `
 
 const LicenseForm = `
             <div class="inner">
-                <h2>Fotos a partir de una licencia</h2>
+                <h2 class="tituloBusq">Fotos a partir de una licencia</h2>
                 <div class="formu">
                     <h3>Selecciona la licencia de las fotos que quieres buscar:</h3>
                     <select id="inputData">
@@ -113,7 +107,6 @@ const LicenseForm = `
 `;
 
 const restPageHtml = `
-        <h3>Fotos</h3>
         <div id="imagenes">
             
         </div>
@@ -125,18 +118,20 @@ const restPageHtml = `
 
 const sizeForm = `
 <div class="inner">
-                <h2>Fotos por un tamaño mínimo/máximo</h2>
+                <h2 class="tituloBusq">Fotos por un tamaño mínimo/máximo</h2>
                 <div class="formu">
                     <h3>Elige si la imagen tendrá como mínimo o como máximo las dimensiones siguientes</h3>
                     <select id="inputData">
                         <option value="min">Como mínimo</option>
                         <option value="max">Como máximo</option>
                     </select>
+                    <br>
                     <h3>Introduce el valor de la anchura:</h3>
                     <input type="number" value="0" id="widthInput">
                     <br>
                     <h3>Introduce el valor de la altura:</h3>
                     <input type="number" value="0" id="heightInput">
+                    <br>
                     <h3>Pulsa el boton para buscar</h3>
                     <input type="submit" value="Enviar" id="enviar">
                 </div>
@@ -290,7 +285,7 @@ function mostrar_fotos(info) {
                 changeContent("imagenConcreta", urls[j]);
             }).addClass("link"));
 
-            $("#imagenes").append($("<p> Busqueda = " + $('#inputData').val() + "</p>"));
+            $("#imagenes").append($("<p> Busqueda = " + "<b>" +$('#inputData').val() + "</b>" + "</p>"));
 
         }
     }
