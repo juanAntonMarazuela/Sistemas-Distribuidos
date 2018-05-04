@@ -35,8 +35,8 @@ const htmlIndex = `
                             <a class="image fit"><img src="images/pic04.jpg" alt="" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #4</h3>
-                                    <p>Explicación de la opción de búsqueda #4</p>
-                                    <a class="button style2 fit"  >Buscar</a>
+                                    <p>Búsqueda por tamaño</p>
+                                    <a class="button style4 fit busquedaBtn" value ="size" >Buscar</a>
                             </div>
                     </div>
 
@@ -123,6 +123,26 @@ const restPageHtml = `
     </div>
 `;
 
+const sizeForm = `
+<div class="inner">
+                <h2>Fotos por un tamaño mínimo/máximo</h2>
+                <div class="formu">
+                    <h3>Elige si la imagen tendrá como mínimo o como máximo las dimensiones siguientes</h3>
+                    <select id="inputData">
+                        <option value="min">Como mínimo</option>
+                        <option value="max">Como máximo</option>
+                    </select>
+                    <h3>Introduce el valor de la anchura:</h3>
+                    <input type="number" value="0" id="widthInput">
+                    <br>
+                    <h3>Introduce el valor de la altura:</h3>
+                    <input type="number" value="0" id="heightInput">
+                    <h3>Pulsa el boton para buscar</h3>
+                    <input type="submit" value="Enviar" id="enviar">
+                </div>
+                <br><br>
+`;
+
 const busquedaCriterioHtml = `
 <div class="inner inicio">
                 <h2>Fotos públicas del usuario</h2>
@@ -153,20 +173,23 @@ $(changeContent("index"));
 function changeContent(page, aditionalInfo) {
 
     switch (page) {
-        case "index": {
-            generateIndexPage();
-            break;
-        };
+        case "index":
+            {
+                generateIndexPage();
+                break;
+            };
 
-        case "busqueda": {
-            generateBusquedaCriterio(aditionalInfo);
-            break;
-        }
+        case "busqueda":
+            {
+                generateBusquedaCriterio(aditionalInfo);
+                break;
+            }
 
-        case "imagenConcreta": {
-            generateImagenConcreta(aditionalInfo);
-            break;
-        }
+        case "imagenConcreta":
+            {
+                generateImagenConcreta(aditionalInfo);
+                break;
+            }
 
     }
 
@@ -189,29 +212,38 @@ function generateBusquedaCriterio(criterio) {
     let form;
     let search;
     switch (criterio) {
-        case "tag": {
-            form = tagsForm;
-            search = 'tags='
-            break;
-        }
-        case "fechaMinima": {
-            form = MinDateForm;
-            search = 'min_taken_date='
-            break;
-        }
-        case "license": {
-            form = LicenseForm;
-            search = 'license='
-            break;
-        }
+        case "tag":
+            {
+                form = tagsForm;
+                search = 'tags='
+                break;
+            }
+        case "fechaMinima":
+            {
+                form = MinDateForm;
+                search = 'min_taken_date='
+                break;
+            }
+        case "license":
+            {
+                form = LicenseForm;
+                search = 'license='
+                break;
+            }
+        case "size":
+            {
+                form = sizeForm;
+                search = 'width=' + $('#widthInput').val() + "&height=" + $('#heightInput').val() + "&dimension_search_mode=";
+                break;
+            }
     }
 
     $('#main').append().html(form + restPageHtml);
 
     $("#enviar").click(function () {
         searchData = document.getElementById('inputData').value;
-        $.getJSON('https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key='
-            + api_key + '&user_id=' + user_id + '&' + search + searchData +
+        $.getJSON('https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key=' +
+            api_key + '&user_id=' + user_id + '&' + search + searchData +
             '&format=json&nojsoncallback=1',
             mostrar_fotos
         );
@@ -247,26 +279,20 @@ function mostrar_fotos(info) {
     } else {
         for (i = 0; i < info.photos.photo.length; i++) {
             var item = info.photos.photo[i];
-            var url = 'https://farm' + item.farm + ".staticflickr.com/" + item.server
-                + '/' + item.id + '_' + item.secret;
+            var url = 'https://farm' + item.farm + ".staticflickr.com/" + item.server +
+                '/' + item.id + '_' + item.secret;
             urls.push(url);
-            $("#imagenes").append($("<img/>").attr({ "src": url + '_m.jpg', "id": i }).click(function () {
+            $("#imagenes").append($("<img/>").attr({
+                "src": url + '_m.jpg',
+                "id": i
+            }).click(function () {
                 let j = $(this).attr('id');
                 changeContent("imagenConcreta", urls[j]);
             }).addClass("link"));
 
             $("#imagenes").append($("<p> Busqueda = " + $('#inputData').val() + "</p>"));
+
         }
     }
     $('div.formu').slideUp(1000);
 }
-
-
-
-
-
-
-
-
-
-
