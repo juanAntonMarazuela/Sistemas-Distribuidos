@@ -5,7 +5,7 @@ const htmlIndex = `
                 <div class="thumbnails">
 
                     <div class="box">
-                            <a class="image fit"><img src="images/fecha.jpe" alt="" /></a>
+                            <a class="image fit"><img src="images/fecha.jpe" alt="" class="fotosIndex" /></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por fecha mínima de captura</h3>
                                     <a class="button fit busquedaBtn" value ="fechaMinima" >Buscar</a>
@@ -13,7 +13,7 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/tag.jpg" alt="" /></a>
+                            <a class="image fit"><img src="images/tag.jpg" alt="" class="fotosIndex"/></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por etiquetas asignadas</h3>
                                     <a  class="button style2 busquedaBtn" value="tag">Buscar</a>
@@ -21,7 +21,7 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a  class="image fit"><img src="images/licencia.png" alt="" /></a>
+                            <a  class="image fit"><img src="images/licencia.png" alt="" class="fotosIndex"/></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por licencia que posee la imagen</h3>
                                     <a class="button style3 fit busquedaBtn" value ="license" >Buscar</a>
@@ -29,7 +29,7 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+                            <a class="image fit"><img src="images/fotoTamaño.jpe" alt="" class="fotosIndex"/></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por tamaño de la imagen</h3>
                                     <a class="button style4 fit busquedaBtn" value ="size" >Buscar</a>
@@ -37,15 +37,15 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+                            <a class="image fit"><img src="images/fotoGeo.jpg" alt="" class="fotosIndex"/></a>
                             <div class="inner">
-                                    <h3>Opción de búsqueda #5</h3>
-                                    <a class="button style3 fit"  >Buscar</a>
+                                    <h3>Opción de búsqueda por geolocalización</h3>
+                                    <a class="button style3 fit busquedaBtn"  value="geo">Buscar</a>
                             </div>
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+                            <a class="image fit"><img src="images/pic06.jpg" alt="" class="fotosIndex"/></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda #6</h3>
                                     <a class="button fit"  >Buscar</a>
@@ -106,6 +106,23 @@ const LicenseForm = `
             
 `;
 
+const GeoForm = `
+            <div class="inner">
+                <h2 class="tituloBusq">Fotos a partir de geolocalización</h2>
+                <div class="formu">
+                    <h3>Selecciona si deseas que aparezcan las fotos con o sin localización:</h3>
+                    <select id="inputData">
+                        <option value="0">Mostrar fotos sin localización</option>
+                        <option value="1">Mostrar fotos con localización</option>
+                    </select>
+                    <br>
+                    <h3>Pulsa el boton para buscar</h3>
+                    <input type="submit" value="Enviar" id="enviar">
+                </div>
+                <br><br>
+            
+`;
+
 const restPageHtml = `
         <div id="imagenes">
             
@@ -120,7 +137,7 @@ const sizeForm = `
 <div class="inner">
                 <h2 class="tituloBusq">Fotos por un tamaño mínimo/máximo</h2>
                 <div class="formu">
-                    <h3>Elige si la imagen tendrá como mínimo o como máximo las dimensiones siguientes</h3>
+                    <h3>Elige si la imagen tendrá como mínimo o como máximo las siguientes dimensiones:</h3>
                     <select id="inputData">
                         <option value="min">Como mínimo</option>
                         <option value="max">Como máximo</option>
@@ -146,10 +163,6 @@ const busquedaCriterioHtml = `
                 </div>
             </div>
 `;
-
-
-
-
 
 const imagenConcretaHtml = `
 <div class="inner">
@@ -231,6 +244,12 @@ function generateBusquedaCriterio(criterio) {
                 search = 'width=' + $('#widthInput').val() + "&height=" + $('#heightInput').val() + "&dimension_search_mode=";
                 break;
             }
+        case "geo":
+            {
+                form = GeoForm;
+                search = 'hasgeo='
+                break;
+            }
     }
 
     $('#main').append().html(form + restPageHtml);
@@ -272,6 +291,7 @@ function mostrar_fotos(info) {
     if (info.photos.photo.length == 0) {
         $("#imagenes").append().html(`<h3> No hay fotos que coincidan con los parametros de busqueda </h3>`);
     } else {
+        $("#imagenes").append("<div>").addClass("thumbnails");
         for (i = 0; i < info.photos.photo.length; i++) {
             var item = info.photos.photo[i];
             var url = 'https://farm' + item.farm + ".staticflickr.com/" + item.server +
@@ -284,10 +304,10 @@ function mostrar_fotos(info) {
                 let j = $(this).attr('id');
                 changeContent("imagenConcreta", urls[j]);
             }).addClass("link"));
-
             $("#imagenes").append($("<p> Busqueda = " + "<b>" +$('#inputData').val() + "</b>" + "</p>"));
-
+            
         }
     }
+    $("#imagenes").append("</div>");
     $('div.formu').slideUp(1000);
 }
