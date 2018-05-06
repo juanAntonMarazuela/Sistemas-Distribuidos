@@ -16,7 +16,7 @@ const htmlIndex = `
                             <a class="image fit"><img src="images/tag.jpg" alt="" class="fotosIndex"/></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por etiquetas asignadas</h3>
-                                    <a  class="button style2 busquedaBtn" value="tag">Buscar</a>
+                                    <a  class="button style2 fit busquedaBtn" value="tag">Buscar</a>
                             </div>
                     </div>
 
@@ -45,10 +45,10 @@ const htmlIndex = `
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/pic06.jpg" alt="" class="fotosIndex"/></a>
+                            <a class="image fit"><img src="images/imagenTexto.jpe" alt="" class="fotosIndex"/></a>
                             <div class="inner">
-                                    <h3>Opción de búsqueda #6</h3>
-                                    <a class="button fit"  >Buscar</a>
+                                    <h3>Opción de búsqueda por texto asociado a una imagen</h3>
+                                    <a class="button fit busquedaBtn" value="texto"  >Buscar</a>
                             </div>
                     </div>
                     
@@ -62,6 +62,19 @@ const tagsForm = `
                 <div class="formu">
                     <h3>Introduce el tag para las fotos que quieres buscar:</h3>
                     <input type="text" value="Prueba" id="inputData">
+                    <br>
+                    <h3>Pulsa el boton para buscar</h3>
+                    <input type="submit" value="Enviar" id="enviar">
+                </div>
+                <br><br>
+`;
+
+const TextForm = `
+<div class="inner">
+                <h2 class="tituloBusq">Fotos por texto asociado a una imagen</h2>
+                <div class="formu">
+                    <h3>Introduce el texto asociado a una imagen (titulo,etiquetas,...), de la foto que deseas buscar:</h3>
+                    <input type="text" value="altotajo" id="inputData">
                     <br>
                     <h3>Pulsa el boton para buscar</h3>
                     <input type="submit" value="Enviar" id="enviar">
@@ -248,6 +261,12 @@ function generateBusquedaCriterio(criterio) {
             {
                 form = GeoForm;
                 search = 'hasgeo='
+                break;
+            }
+        case "texto":
+            {
+                form = TextForm;
+                search = 'text='
                 break;
             }
     }
