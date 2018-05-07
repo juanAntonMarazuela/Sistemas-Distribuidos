@@ -150,18 +150,12 @@ const sizeForm = `
 <div class="inner">
                 <h2 class="tituloBusq">Fotos por un tamaño mínimo/máximo</h2>
                 <div class="formu">
-                    <h3>Elige si la imagen tendrá como mínimo o como máximo las siguientes dimensiones:</h3>
+                    <h3>Elige el tamaño de las imagenes a buscar</h3>
                     <select id="inputData">
-                        <option value="min">Como mínimo</option>
-                        <option value="max">Como máximo</option>
+                        <option value="">Mostrar todas</option>
+                        <option value="?dimension_search_mode=min&width=640&height=640">Medianas (640x640)</option>
+                        <option value="?dimension_search_mode=min&width=1024&height=1024">Grandes (1024x1024)</option>
                     </select>
-                    <br>
-                    <h3>Introduce el valor de la anchura:</h3>
-                    <input type="number" value="0" id="widthInput">
-                    <br>
-                    <h3>Introduce el valor de la altura:</h3>
-                    <input type="number" value="0" id="heightInput">
-                    <br>
                     <h3>Pulsa el boton para buscar</h3>
                     <input type="submit" value="Enviar" id="enviar">
                 </div>
@@ -254,7 +248,7 @@ function generateBusquedaCriterio(criterio) {
         case "size":
             {
                 form = sizeForm;
-                search = 'width=' + $('#widthInput').val() + "&height=" + $('#heightInput').val() + "&dimension_search_mode=";
+                search = '';
                 break;
             }
         case "geo":
@@ -323,8 +317,8 @@ function mostrar_fotos(info) {
                 let j = $(this).attr('id');
                 changeContent("imagenConcreta", urls[j]);
             }).addClass("link"));
-            $("#imagenes").append($("<p> Busqueda = " + "<b>" +$('#inputData').val() + "</b>" + "</p>"));
-            
+            $("#imagenes").append($("<p> Busqueda = " + "<b>" + $('#inputData').val() + "</b>" + "</p>"));
+
         }
     }
     $("#imagenes").append("</div>");
