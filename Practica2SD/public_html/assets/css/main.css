@@ -568,6 +568,7 @@ textarea {
     padding: 0.75em 1em;
 }
 
+/*
 input[type="checkbox"],
 input[type="radio"] {
     -moz-appearance: none;
@@ -637,12 +638,12 @@ input[type="radio"]:focus + label:before {
 
 input[type="checkbox"] + label:before {
     border-radius: 4px;
-}
+} 
 
 input[type="radio"] + label:before {
     border-radius: 100%;
 }
-
+*/
 ::-webkit-input-placeholder {
     color: rgba(255, 255, 255, 0.5) !important;
     opacity: 1.0;
@@ -1423,8 +1424,7 @@ button.style3:active,
     -webkit-transition-delay: 1s;
     -ms-transition-delay: 1s;
     transition-delay: 1s;
-    content: '';
-    background-color: #42424f;
+    content: '';                       
     display: block;
     height: 100%;
     left: 0;

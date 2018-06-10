@@ -1,61 +1,63 @@
+
+//Contenido HTML inicial de la página con los criterios de búsqueda disponibles para las fotos
 const htmlIndex = `
 <div class="inner">
-                
             <!-- Boxes -->
                 <div class="thumbnails">
 
                     <div class="box">
-                            <a class="image fit"><img src="images/fecha.jpe" alt="" class="fotosIndex" /></a>
+                            <a class="image fit"></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por fecha mínima de captura</h3>
-                                    <a class="button fit busquedaBtn" value ="fechaMinima" >Buscar</a>
+                                    <input type="checkbox" class="checks" name="type" value="fecha"><br>
                             </div>
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/tag.jpg" alt="" class="fotosIndex"/></a>
+                            <a class="image fit"></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por etiquetas asignadas</h3>
-                                    <a  class="button style2 fit busquedaBtn" value="tag">Buscar</a>
+                                    <input type="checkbox" class="checks" name="type" value="etiqueta"><br>
                             </div>
                     </div>
 
                     <div class="box">
-                            <a  class="image fit"><img src="images/licencia.png" alt="" class="fotosIndex"/></a>
+                            <a  class="image fit"></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por licencia que posee la imagen</h3>
-                                    <a class="button style3 fit busquedaBtn" value ="license" >Buscar</a>
+                                    <input type="checkbox" class="checks" name="type" value="licencia"><br>
                             </div>
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/fotoTamaño.jpe" alt="" class="fotosIndex"/></a>
+                            <a class="image fit"></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por tamaño de la imagen</h3>
-                                    <a class="button style4 fit busquedaBtn" value ="size" >Buscar</a>
+                                    <input type="checkbox" class="checks" name="type" value="tamaño"><br>
                             </div>
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/fotoGeo.jpg" alt="" class="fotosIndex"/></a>
+                            <a class="image fit"></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por geolocalización</h3>
-                                    <a class="button style3 fit busquedaBtn"  value="geo">Buscar</a>
+                                    <input type="checkbox" class="checks" name="type" value="geolocalizacion"><br>
                             </div>
                     </div>
 
                     <div class="box">
-                            <a class="image fit"><img src="images/imagenTexto.jpe" alt="" class="fotosIndex"/></a>
+                            <a class="image fit"></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por texto asociado a una imagen</h3>
-                                    <a class="button fit busquedaBtn" value="texto"  >Buscar</a>
+                                    <input type="checkbox" class="checks" name="type" value="texto"><br>
                             </div>
                     </div>
-                    
+                    <input type="submit" class="busquedaBtn" value="Siguiente" id="enviar">
                 </div>
-            </div>
+        </div>
 `;
 
+//Contenido HTML para especificar el criterio de búsqueda por etiqueta
 const tagsForm = `
 <div class="inner">
                 <h2 class="tituloBusq">Fotos por un tag especifico</h2>
@@ -69,6 +71,7 @@ const tagsForm = `
                 <br><br>
 `;
 
+//Contenido HTML para especificar el criterio de búsqueda por texto
 const TextForm = `
 <div class="inner">
                 <h2 class="tituloBusq">Fotos por texto asociado a una imagen</h2>
@@ -82,6 +85,7 @@ const TextForm = `
                 <br><br>
 `;
 
+//Contenido HTML para especificar el criterio de búsqueda por fecha de captura mínima
 const MinDateForm = `
 <div class="inner">
                 <h2 class="tituloBusq">Fotos a partir de una fecha</h2>
@@ -95,6 +99,7 @@ const MinDateForm = `
                 <br><br>
 `;
 
+//Contenido HTML para especificar el criterio de búsqueda por licencia de las fotos
 const LicenseForm = `
             <div class="inner">
                 <h2 class="tituloBusq">Fotos a partir de una licencia</h2>
@@ -119,6 +124,7 @@ const LicenseForm = `
             
 `;
 
+//Contenido HTML para especificar el criterio de búsqueda por posibilidad de geolocalización
 const GeoForm = `
             <div class="inner">
                 <h2 class="tituloBusq">Fotos a partir de geolocalización</h2>
@@ -136,16 +142,7 @@ const GeoForm = `
             
 `;
 
-const restPageHtml = `
-        <div id="imagenes">
-            
-        </div>
-        <a class ="link" id ="buscarPorOtraEtiqueta">Cambiar parametros de busqueda</a>
-        <br>
-        <a class ="link" id ="botonIndex" >Volver a Inicio</a>
-    </div>
-`;
-
+//Contenido HTML para especificar el criterio de búsqueda por tamaño de las fotos
 const sizeForm = `
 <div class="inner">
                 <h2 class="tituloBusq">Fotos por un tamaño mínimo/máximo</h2>
@@ -162,6 +159,20 @@ const sizeForm = `
                 <br><br>
 `;
 
+//Contenido HTML adicional la página de busqueda por criterio, con la posibilidad de cambiar los parametros
+//de busqueda o volver al inicio de la página web
+const restPageHtml = `
+        <div id="imagenes">
+            
+        </div>
+        <a class ="link" id ="buscarPorOtraEtiqueta">Cambiar parametros de busqueda</a>
+        <br><br>
+        <a class ="link" id ="botonIndex" >Volver a Inicio</a>
+    </div>
+`;
+
+//Contenido HTML resultante de la búsqueda por criterio de las fotos, siendo el div "imágenes"
+//el lugar donde se añadirán las fotos desde Flickr posteriormente
 const busquedaCriterioHtml = `
 <div class="inner inicio">
                 <h2>Fotos públicas del usuario</h2>
@@ -171,6 +182,7 @@ const busquedaCriterioHtml = `
             </div>
 `;
 
+//Contenido HTML para visualizar a mayor tamaño una foto específica de las resultantes de un criterio de búsqueda
 const imagenConcretaHtml = `
 <div class="inner">
                 <h2>Fotos a partir de una fecha</h2>
@@ -182,9 +194,11 @@ const imagenConcretaHtml = `
     </div>
 `;
 
-/* Funcion que se ejecuta al cargar la pagina*/
+//Función que se ejecuta al cargar la página
 $(changeContent("index"));
 
+//Función que cambia el contenido de la página según itere el usuario por la web
+//(página principal, de los criterios de busqueda y de una imagen concreta)
 function changeContent(page, aditionalInfo) {
 
     switch (page) {
@@ -210,19 +224,25 @@ function changeContent(page, aditionalInfo) {
 
 }
 
-
+//Función que genera la página inicial de la web, añadiendole el contenido inicial antes creado en htmlIndex
+//y cambiando su contenido en caso de que el usuario haga click en un criterio de busqueda
 function generateIndexPage() {
     $('#main').append().html(htmlIndex);
 
-    /* Events */
+    /* Events*/
     $('.busquedaBtn').each(function () {
         console.log("Iterated");
         $(this).click(function () {
-            changeContent("busqueda", $(this).attr('value'));
+            var checked = $('input[type="checkbox]:checked');
+            console.log(checked);
+            changeContent("busqueda",checked);
         });
     });
 }
 
+//Función que genera la página de una busqueda de criterio, añadiendole el contenido HTML según el criterio
+//seleccionado, preparando la búsqueda en la API de flickr introduciendo el criterio seleccionado en la 
+//variable "search" y creando eventos para cambiar los parametros de busqueda o volver al inicio de la web
 function generateBusquedaCriterio(criterio) {
     let form;
     let search;
@@ -287,6 +307,8 @@ function generateBusquedaCriterio(criterio) {
 
 }
 
+//Función que genera la página de una imagen especifica, seleccionada previamente de las resultantes de una 
+//búsqueda, además crea el evento para volver a la página inicial haciendo click en un botón
 function generateImagenConcreta(url) {
 
     $('#main').append().html(imagenConcretaHtml);
@@ -298,6 +320,8 @@ function generateImagenConcreta(url) {
     })
 }
 
+//Función que realiza la petición a la API de flickr, devolviendo las imagenes resultantes de los criterios
+//de busqueda elegidos y añadiendolos a la página dentro del div "imágenes"
 function mostrar_fotos(info) {
     var i;
     let urls = [];
