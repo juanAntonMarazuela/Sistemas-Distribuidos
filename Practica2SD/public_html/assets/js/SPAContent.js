@@ -59,49 +59,39 @@ const htmlIndex = `
 
 //Contenido HTML para especificar el criterio de búsqueda por etiqueta
 const tagsForm = `
-<div class="inner">
                 <h2 class="tituloBusq">Fotos por un tag especifico</h2>
                 <div class="formu">
                     <h3>Introduce el tag para las fotos que quieres buscar:</h3>
                     <input type="text" value="Prueba" id="inputData">
                     <br>
-                    <h3>Pulsa el boton para buscar</h3>
-                    <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
 `;
 
 //Contenido HTML para especificar el criterio de búsqueda por texto
 const TextForm = `
-<div class="inner">
                 <h2 class="tituloBusq">Fotos por texto asociado a una imagen</h2>
                 <div class="formu">
                     <h3>Introduce el texto asociado a una imagen (titulo,etiquetas,...), de la foto que deseas buscar:</h3>
                     <input type="text" value="altotajo" id="inputData">
                     <br>
-                    <h3>Pulsa el boton para buscar</h3>
-                    <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
 `;
 
 //Contenido HTML para especificar el criterio de búsqueda por fecha de captura mínima
 const MinDateForm = `
-<div class="inner">
                 <h2 class="tituloBusq">Fotos a partir de una fecha</h2>
                 <div class="formu">
                     <h3>Selecciona la fecha a partir de la que quieres buscar:</h3>
                     <input class ="calendar" type="date" id="inputData">
                     <br><br>
-                    <h3>Pulsa el boton para buscar</h3>
-                    <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
 `;
 
 //Contenido HTML para especificar el criterio de búsqueda por licencia de las fotos
 const LicenseForm = `
-            <div class="inner">
                 <h2 class="tituloBusq">Fotos a partir de una licencia</h2>
                 <div class="formu">
                     <h3>Selecciona la licencia de las fotos que quieres buscar:</h3>
@@ -117,8 +107,6 @@ const LicenseForm = `
                         <option value="3">Atribución-NoComercial-SinDerivadas</option>
                     </select>
                     <br>
-                    <h3>Pulsa el boton para buscar</h3>
-                    <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
             
@@ -126,7 +114,6 @@ const LicenseForm = `
 
 //Contenido HTML para especificar el criterio de búsqueda por posibilidad de geolocalización
 const GeoForm = `
-            <div class="inner">
                 <h2 class="tituloBusq">Fotos a partir de geolocalización</h2>
                 <div class="formu">
                     <h3>Selecciona si deseas que aparezcan las fotos con o sin localización:</h3>
@@ -135,8 +122,6 @@ const GeoForm = `
                         <option value="1">Mostrar fotos con localización</option>
                     </select>
                     <br>
-                    <h3>Pulsa el boton para buscar</h3>
-                    <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
             
@@ -144,7 +129,6 @@ const GeoForm = `
 
 //Contenido HTML para especificar el criterio de búsqueda por tamaño de las fotos
 const sizeForm = `
-<div class="inner">
                 <h2 class="tituloBusq">Fotos por un tamaño mínimo/máximo</h2>
                 <div class="formu">
                     <h3>Elige el tamaño de las imagenes a buscar</h3>
@@ -153,8 +137,6 @@ const sizeForm = `
                         <option value="?dimension_search_mode=min&width=640&height=640">Medianas (640x640)</option>
                         <option value="?dimension_search_mode=min&width=1024&height=1024">Grandes (1024x1024)</option>
                     </select>
-                    <h3>Pulsa el boton para buscar</h3>
-                    <input type="submit" value="Enviar" id="enviar">
                 </div>
                 <br><br>
 `;
@@ -230,13 +212,18 @@ function generateIndexPage() {
     $('#main').append().html(htmlIndex);
 
     /* Events*/
-    $('.busquedaBtn').each(function () {
+    $('.busquedaBtn').click(function () {
         console.log("Iterated");
-        $(this).click(function () {
-            var checked = $('input[type="checkbox]:checked');
+        let checked = [];
+            $('input:checked').each(function() {
+                checked.push($(this).attr("value"));
+            });
             console.log(checked);
+            if (checked.length > 0) {
             changeContent("busqueda",checked);
-        });
+            } else {
+                alert("No ha elegido ningún criterio de búsqueda");
+            }
     });
 }
 
@@ -244,46 +231,55 @@ function generateIndexPage() {
 //seleccionado, preparando la búsqueda en la API de flickr introduciendo el criterio seleccionado en la 
 //variable "search" y creando eventos para cambiar los parametros de busqueda o volver al inicio de la web
 function generateBusquedaCriterio(criterio) {
-    let form;
+    let form = `<div class="inner inicio"> `;
     let search;
-    switch (criterio) {
-        case "tag":
-            {
-                form = tagsForm;
-                search = 'tags='
-                break;
-            }
-        case "fechaMinima":
-            {
-                form = MinDateForm;
-                search = 'min_taken_date='
-                break;
-            }
-        case "license":
-            {
-                form = LicenseForm;
-                search = 'license='
-                break;
-            }
-        case "size":
-            {
-                form = sizeForm;
-                search = '';
-                break;
-            }
-        case "geo":
-            {
-                form = GeoForm;
-                search = 'hasgeo='
-                break;
-            }
-        case "texto":
-            {
-                form = TextForm;
-                search = 'text='
-                break;
+    console.log(criterio)
+    for (let n in criterio){ 
+        switch (criterio[n]) {
+            case "etiqueta":
+                {
+                    form += tagsForm;
+                    search = 'tags'
+                    break;
+                }
+            case "fecha":
+                {
+                    form += MinDateForm;
+                    search = 'min_taken_date'
+                    break;
+                }
+            case "licencia":
+                {
+                    form += LicenseForm;
+                    search = 'license='
+                    break;
+                }
+            case "tamaño":
+                {
+                    form += sizeForm;
+                    search = '';
+                    break;
+                }
+            case "geolocalizacion":
+                {
+                    form += GeoForm;
+                    search = 'hasgeo='
+                    break;
+                }
+            case "texto":
+                {
+                    form += TextForm;
+                    search = 'text='
+                    break;
+                }
             }
     }
+
+
+    form += 
+    ` <h3>Pulsa el boton para buscar</h3>
+      <input type="submit" value="Enviar" id="enviar">
+    `;
 
     $('#main').append().html(form + restPageHtml);
 
