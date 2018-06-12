@@ -32,8 +32,8 @@ const htmlIndex = `
                     <div class="box">
                             <a class="image fit"></a>
                             <div class="inner">
-                                    <h3>Opción de búsqueda por tamaño de la imagen</h3>
-                                    <input type="checkbox" class="checks" name="type" value="tamaño"><br>
+                                    <h3>Opción de búsqueda por tipo de la imagen</h3>
+                                    <input type="checkbox" class="checks" name="type" value="tipo"><br>
                             </div>
                     </div>
 
@@ -127,15 +127,19 @@ const GeoForm = `
             
 `;
 
-//Contenido HTML para especificar el criterio de búsqueda por tamaño de las fotos
-const sizeForm = `
-                <h2 class="tituloBusq">Fotos por un tamaño mínimo/máximo</h2>
+//Contenido HTML para especificar el criterio de búsqueda por el tipo de imagen a devolver (foto, captura de pantalla u otro tipo)
+const typeForm = `
+                <h2 class="tituloBusq">Tipos de fotos a devolver</h2>
                 <div class="formu">
-                    <h3>Elige el tamaño de las imagenes a buscar</h3>
-                    <select class="inputData" search="dimension_search_mode=" name="Tamaño minimo">
-                        <option value="">Mostrar todas</option>
-                        <option value="min&width=640&height=640">Medianas (640x640)</option>
-                        <option value="min&width=1024&height=1024">Grandes (1024x1024)</option>
+                    <h3>Elige el tipo de imágenes a buscar:</h3>
+                    <select class="inputData" search='content_type=' name="Tipo: ">
+                        <option value="1">Sólo fotos</option>
+                        <option value="2">Sólo capturas de pantalla</option>
+                        <option value="3">Sólo otras</option>
+                        <option value="4">Fotos y capturas de pantalla</option>
+                        <option value="5">Capturas de pantalla y otras</option>
+                        <option value="6">Fotos y otras</option>
+                        <option value="7">Todo tipo de imágenes</option>
                     </select>
                 </div>
                 <br><br>
@@ -249,9 +253,9 @@ function generateBusquedaCriterio(criterio) {
                     form += LicenseForm;
                     break;
                 }
-            case "tamaño":
+            case "tipo":
                 {
-                    form += sizeForm;
+                    form += typeForm;
                     break;
                 }
             case "geolocalizacion":
