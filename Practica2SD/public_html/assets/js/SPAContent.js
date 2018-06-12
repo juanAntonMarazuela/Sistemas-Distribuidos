@@ -62,7 +62,7 @@ const tagsForm = `
                 <h2 class="tituloBusq">Fotos por un tag especifico</h2>
                 <div class="formu">
                     <h3>Introduce el tag para las fotos que quieres buscar:</h3>
-                    <input type="text" value="Prueba"  class="inputData" search = 'tags='>
+                    <input type="text" value="Prueba"  class="inputData" search = 'tags=' name="Etiqueta">
                     <br>
                 </div>
                 <br><br>
@@ -73,7 +73,7 @@ const TextForm = `
                 <h2 class="tituloBusq">Fotos por texto asociado a una imagen</h2>
                 <div class="formu">
                     <h3>Introduce el texto asociado a una imagen (titulo,etiquetas,...), de la foto que deseas buscar:</h3>
-                    <input type="text" value="altotajo"  class="inputData" search = 'text='>
+                    <input type="text" value="altotajo"  class="inputData" search = 'text=' name="Texto">
                     <br>
                 </div>
                 <br><br>
