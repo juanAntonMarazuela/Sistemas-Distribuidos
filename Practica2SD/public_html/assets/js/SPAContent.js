@@ -62,7 +62,7 @@ const tagsForm = `
                 <h2 class="tituloBusq">Fotos por un tag especifico</h2>
                 <div class="formu">
                     <h3>Introduce el tag para las fotos que quieres buscar:</h3>
-                    <input type="text" value="Prueba" id="inputData">
+                    <input type="text" value="Prueba"  class="inputData" search = 'tags='>
                     <br>
                 </div>
                 <br><br>
@@ -73,7 +73,7 @@ const TextForm = `
                 <h2 class="tituloBusq">Fotos por texto asociado a una imagen</h2>
                 <div class="formu">
                     <h3>Introduce el texto asociado a una imagen (titulo,etiquetas,...), de la foto que deseas buscar:</h3>
-                    <input type="text" value="altotajo" id="inputData">
+                    <input type="text" value="altotajo"  class="inputData" search = 'text='>
                     <br>
                 </div>
                 <br><br>
@@ -84,7 +84,7 @@ const MinDateForm = `
                 <h2 class="tituloBusq">Fotos a partir de una fecha</h2>
                 <div class="formu">
                     <h3>Selecciona la fecha a partir de la que quieres buscar:</h3>
-                    <input class ="calendar" type="date" id="inputData">
+                    <input class ="calendar inputData" type="date" search='min_taken_date=' name="Fecha minima">
                     <br><br>
                 </div>
                 <br><br>
@@ -95,7 +95,7 @@ const LicenseForm = `
                 <h2 class="tituloBusq">Fotos a partir de una licencia</h2>
                 <div class="formu">
                     <h3>Selecciona la licencia de las fotos que quieres buscar:</h3>
-                    <select id="inputData">
+                    <select class="inputData" search='license=' name="Licencia">
                         <option value="0">Todos los derechos reservados</option>
                         <option value="10">Obra de dominio público</option>
                         <option value="9">Dedicatoria al dominio público</option>
@@ -117,7 +117,7 @@ const GeoForm = `
                 <h2 class="tituloBusq">Fotos a partir de geolocalización</h2>
                 <div class="formu">
                     <h3>Selecciona si deseas que aparezcan las fotos con o sin localización:</h3>
-                    <select id="inputData">
+                    <select  class="inputData" search='hasgeo=' name="Tiene localizacion">
                         <option value="0">Mostrar fotos sin localización</option>
                         <option value="1">Mostrar fotos con localización</option>
                     </select>
@@ -132,10 +132,10 @@ const sizeForm = `
                 <h2 class="tituloBusq">Fotos por un tamaño mínimo/máximo</h2>
                 <div class="formu">
                     <h3>Elige el tamaño de las imagenes a buscar</h3>
-                    <select id="inputData">
+                    <select class="inputData" search="dimension_search_mode=" name="Tamaño minimo">
                         <option value="">Mostrar todas</option>
-                        <option value="?dimension_search_mode=min&width=640&height=640">Medianas (640x640)</option>
-                        <option value="?dimension_search_mode=min&width=1024&height=1024">Grandes (1024x1024)</option>
+                        <option value="min&width=640&height=640">Medianas (640x640)</option>
+                        <option value="min&width=1024&height=1024">Grandes (1024x1024)</option>
                     </select>
                 </div>
                 <br><br>
@@ -213,63 +213,55 @@ function generateIndexPage() {
 
     /* Events*/
     $('.busquedaBtn').click(function () {
-        console.log("Iterated");
         let checked = [];
-            $('input:checked').each(function() {
-                checked.push($(this).attr("value"));
-            });
-            console.log(checked);
-            if (checked.length > 0) {
-            changeContent("busqueda",checked);
-            } else {
-                alert("No ha elegido ningún criterio de búsqueda");
-            }
+        $('input:checked').each(function() {
+            checked.push($(this).attr("value"));
+        });
+        console.log(checked);
+        if (checked.length > 0) {
+        changeContent("busqueda",checked);
+        } else {
+            alert("No ha elegido ningún criterio de búsqueda");
+        }
     });
 }
 
 //Función que genera la página de una busqueda de criterio, añadiendole el contenido HTML según el criterio
 //seleccionado, preparando la búsqueda en la API de flickr introduciendo el criterio seleccionado en la 
 //variable "search" y creando eventos para cambiar los parametros de busqueda o volver al inicio de la web
+var textoBusqueda=""; /* El texto con los parametros de la busqueda que se mostrara al lado de cada foto en los resultados */
 function generateBusquedaCriterio(criterio) {
     let form = `<div class="inner inicio"> `;
-    let search;
-    console.log(criterio)
     for (let n in criterio){ 
         switch (criterio[n]) {
             case "etiqueta":
                 {
                     form += tagsForm;
-                    search = 'tags'
                     break;
                 }
             case "fecha":
                 {
                     form += MinDateForm;
-                    search = 'min_taken_date'
                     break;
                 }
             case "licencia":
                 {
                     form += LicenseForm;
-                    search = 'license='
                     break;
                 }
             case "tamaño":
                 {
                     form += sizeForm;
-                    search = '';
                     break;
                 }
             case "geolocalizacion":
                 {
                     form += GeoForm;
-                    search = 'hasgeo='
                     break;
                 }
             case "texto":
                 {
                     form += TextForm;
-                    search = 'text='
                     break;
                 }
             }
@@ -277,16 +269,30 @@ function generateBusquedaCriterio(criterio) {
 
 
     form += 
-    ` <h3>Pulsa el boton para buscar</h3>
-      <input type="submit" value="Enviar" id="enviar">
+    ` <span id="enviarSpan" >
+        <h3>Pulsa el boton para buscar</h3>
+        <input type="submit" value="Enviar" id="enviar">
+    </span>
     `;
 
     $('#main').append().html(form + restPageHtml);
 
     $("#enviar").click(function () {
-        searchData = document.getElementById('inputData').value;
+        let search = "";
+        textoBusqueda = "";
+        $("#enviarSpan").hide("slow");
+        /* Se recogen los datos de la busqueda de los inputs que pertenecen la clase .inputData */
+        $(".inputData").each(function() {
+            search += '&';
+            search += $(this).attr("search") + $(this).val();
+            textoBusqueda +=  $(this).attr("name") + ": " + $(this).val() + " ; ";
+
+        });
+
+        console.log(search);
+
         $.getJSON('https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key=' +
-            api_key + '&user_id=' + user_id + '&' + search + searchData +
+            api_key + '&user_id=' + user_id + search +
             '&format=json&nojsoncallback=1',
             mostrar_fotos
         );
@@ -337,7 +343,7 @@ function mostrar_fotos(info) {
                 let j = $(this).attr('id');
                 changeContent("imagenConcreta", urls[j]);
             }).addClass("link"));
-            $("#imagenes").append($("<p> Busqueda = " + "<b>" + $('#inputData').val() + "</b>" + "</p>"));
+            $("#imagenes").append($("<p> Busqueda = " + "<b>" + textoBusqueda + "</b>" + "</p>"));
 
         }
     }
