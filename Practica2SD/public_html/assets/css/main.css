@@ -1301,9 +1301,6 @@ button.style3:active,
     -webkit-justify-content: center;
     -ms-justify-content: center;
     justify-content: center;
-    padding: 8em 4em 6em 4em;
-    min-height: 70vh;
-    background-image: url("../../images/banner.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -1311,6 +1308,7 @@ button.style3:active,
     position: relative;
     text-align: center;
     overflow: hidden;
+    margin-top: 50px;
 }
 
 #banner .inner {
@@ -1426,7 +1424,7 @@ button.style3:active,
     transition-delay: 1s;
     content: '';                       
     display: block;
-    height: 100%;
+    height: 50%;
     left: 0;
     opacity: 0.45;
     position: absolute;
@@ -1556,11 +1554,19 @@ select {
 }
 
 .tituloBusq{
-    font-size: 40px;
+    font-size: 35px;
     height:30px;
 }
 
 .fotosIndex{
     width: 600px;
     height: 260px;
+}
+
+#center{
+    text-align:center;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.5em;
+    font-weight: 300;
+    
 }

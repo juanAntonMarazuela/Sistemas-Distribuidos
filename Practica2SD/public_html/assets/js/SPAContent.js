@@ -2,6 +2,8 @@
 //Contenido HTML inicial de la página con los criterios de búsqueda disponibles para las fotos
 const htmlIndex = `
 <div class="inner">
+    <h3 id="center">Selecciona los criterios de búsqueda que desees para iniciar la búsqueda de fotos</h3>
+    <br>
             <!-- Boxes -->
                 <div class="thumbnails">
 
@@ -59,40 +61,36 @@ const htmlIndex = `
 
 //Contenido HTML para especificar el criterio de búsqueda por etiqueta
 const tagsForm = `
-                <h2 class="tituloBusq">Fotos por un tag especifico</h2>
                 <div class="formu">
                     <h3>Introduce el tag para las fotos que quieres buscar:</h3>
                     <input type="text" value="Prueba"  class="inputData" search = 'tags=' name="Etiqueta">
                     <br>
                 </div>
-                <br><br>
+                <br>
 `;
 
 //Contenido HTML para especificar el criterio de búsqueda por texto
 const TextForm = `
-                <h2 class="tituloBusq">Fotos por texto asociado a una imagen</h2>
                 <div class="formu">
                     <h3>Introduce el texto asociado a una imagen (titulo,etiquetas,...), de la foto que deseas buscar:</h3>
                     <input type="text" value="altotajo"  class="inputData" search = 'text=' name="Texto">
                     <br>
                 </div>
-                <br><br>
+                <br>
 `;
 
 //Contenido HTML para especificar el criterio de búsqueda por fecha de captura mínima
 const MinDateForm = `
-                <h2 class="tituloBusq">Fotos a partir de una fecha</h2>
                 <div class="formu">
                     <h3>Selecciona la fecha a partir de la que quieres buscar:</h3>
                     <input class ="calendar inputData" type="date" search='min_taken_date=' name="Fecha minima">
                     <br><br>
                 </div>
-                <br><br>
+                <br>
 `;
 
 //Contenido HTML para especificar el criterio de búsqueda por licencia de las fotos
 const LicenseForm = `
-                <h2 class="tituloBusq">Fotos a partir de una licencia</h2>
                 <div class="formu">
                     <h3>Selecciona la licencia de las fotos que quieres buscar:</h3>
                     <select class="inputData" search='license=' name="Licencia">
@@ -108,13 +106,12 @@ const LicenseForm = `
                     </select>
                     <br>
                 </div>
-                <br><br>
+                <br>
             
 `;
 
 //Contenido HTML para especificar el criterio de búsqueda por posibilidad de geolocalización
 const GeoForm = `
-                <h2 class="tituloBusq">Fotos a partir de geolocalización</h2>
                 <div class="formu">
                     <h3>Selecciona si deseas que aparezcan las fotos con o sin localización:</h3>
                     <select  class="inputData" search='hasgeo=' name="Tiene localizacion">
@@ -123,13 +120,12 @@ const GeoForm = `
                     </select>
                     <br>
                 </div>
-                <br><br>
+                <br>
             
 `;
 
 //Contenido HTML para especificar el criterio de búsqueda por el tipo de imagen a devolver (foto, captura de pantalla u otro tipo)
 const typeForm = `
-                <h2 class="tituloBusq">Tipos de fotos a devolver</h2>
                 <div class="formu">
                     <h3>Elige el tipo de imágenes a buscar:</h3>
                     <select class="inputData" search='content_type=' name="Tipo: ">
@@ -142,17 +138,18 @@ const typeForm = `
                         <option value="7">Todo tipo de imágenes</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 `;
 
 //Contenido HTML adicional la página de busqueda por criterio, con la posibilidad de cambiar los parametros
 //de busqueda o volver al inicio de la página web
 const restPageHtml = `
+        <br><br>
         <div id="imagenes">
             
         </div>
         <a class ="link" id ="buscarPorOtraEtiqueta">Cambiar parametros de busqueda</a>
-        <br><br>
+        <br>
         <a class ="link" id ="botonIndex" >Volver a Inicio</a>
     </div>
 `;
@@ -236,6 +233,7 @@ function generateIndexPage() {
 var textoBusqueda=""; /* El texto con los parametros de la busqueda que se mostrara al lado de cada foto en los resultados */
 function generateBusquedaCriterio(criterio) {
     let form = `<div class="inner inicio"> `;
+    form+=` <h2 class="tituloBusq">Fotos a partir de los criterios seleccionados</h2> `;
     for (let n in criterio){ 
         switch (criterio[n]) {
             case "etiqueta":
