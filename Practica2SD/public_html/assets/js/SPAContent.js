@@ -2,7 +2,8 @@
 //Contenido HTML inicial de la página con los criterios de búsqueda disponibles para las fotos
 const htmlIndex = `
 <div class="inner">
-    <h3 id="center">Selecciona los criterios de búsqueda que desees para iniciar la búsqueda de fotos</h3>
+    <h3 id="center">Selecciona los criterios de búsqueda que desees para iniciar la búsqueda de fotos,
+    y pulse Siguiente para continuar</h3>
     <br>
             <!-- Boxes -->
                 <div class="thumbnails">
@@ -11,7 +12,31 @@ const htmlIndex = `
                             <a class="image fit"></a>
                             <div class="inner">
                                     <h3>Opción de búsqueda por fecha mínima de captura</h3>
-                                    <input type="checkbox" class="checks" name="type" value="fecha"><br>
+                                    <input type="checkbox" class="checks" name="type" value="fechaMinCap"><br>
+                            </div>
+                    </div>
+            
+                    <div class="box">
+                            <a class="image fit"></a>
+                            <div class="inner">
+                                    <h3>Opción de búsqueda por fecha máxima de captura</h3>
+                                    <input type="checkbox" class="checks" name="type" value="fechaMaxCap"><br>
+                            </div>
+                    </div>
+            
+                    <div class="box">
+                            <a class="image fit"></a>
+                            <div class="inner">
+                                    <h3>Opción de búsqueda por fecha mínima de subida</h3>
+                                    <input type="checkbox" class="checks" name="type" value="fechaMinSub"><br>
+                            </div>
+                    </div>
+            
+                    <div class="box">
+                            <a class="image fit"></a>
+                            <div class="inner">
+                                    <h3>Opción de búsqueda por fecha máxima de subida</h3>
+                                    <input type="checkbox" class="checks" name="type" value="fechaMaxSub"><br>
                             </div>
                     </div>
 
@@ -79,11 +104,42 @@ const TextForm = `
                 <br>
 `;
 
+
 //Contenido HTML para especificar el criterio de búsqueda por fecha de captura mínima
 const MinDateForm = `
                 <div class="formu">
-                    <h3>Selecciona la fecha a partir de la que quieres buscar:</h3>
+                    <h3>Selecciona la fecha minima de captura a partir de la cual quieres buscar:</h3>
                     <input class ="calendar inputData" type="date" search='min_taken_date=' name="Fecha minima">
+                    <br><br>
+                </div>
+                <br>
+`;
+
+//Contenido HTML para especificar el criterio de búsqueda por fecha de captura máxima
+const MaxDateForm = `
+                <div class="formu">
+                    <h3>Selecciona la fecha máxima de captura a partir de la cual quieres buscar:</h3>
+                    <input class ="calendar inputData" type="date" search='max_taken_date=' name="Fecha maxima">
+                    <br><br>
+                </div>
+                <br>
+`;
+
+//Contenido HTML para especificar el criterio de búsqueda por fecha de subida mínima
+const MinUploadForm = `
+                <div class="formu">
+                    <h3>Selecciona la fecha mínima de subida a partir de la cual quieres buscar:</h3>
+                    <input class ="calendar inputData" type="date" search='min_upload_date=' name="Fecha minima subida">
+                    <br><br>
+                </div>
+                <br>
+`;
+
+//Contenido HTML para especificar el criterio de búsqueda por fecha de subida máxima
+const MaxUploadForm = `
+                <div class="formu">
+                    <h3>Selecciona la fecha máxima de subida a partir de la cual quieres buscar:</h3>
+                    <input class ="calendar inputData" type="date" search='max_upload_date=' name="Fecha maxima subida">
                     <br><br>
                 </div>
                 <br>
@@ -241,9 +297,24 @@ function generateBusquedaCriterio(criterio) {
                     form += tagsForm;
                     break;
                 }
-            case "fecha":
+            case "fechaMinCap":
                 {
                     form += MinDateForm;
+                    break;
+                }
+            case "fechaMaxCap":
+                {
+                    form += MaxDateForm;
+                    break;
+                }
+            case "fechaMinSub":
+                {
+                    form += MinUploadForm;
+                    break;
+                }
+            case "fechaMaxSub":
+                {
+                    form += MaxUploadForm;
                     break;
                 }
             case "licencia":
