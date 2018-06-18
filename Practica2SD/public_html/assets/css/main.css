@@ -1563,10 +1563,23 @@ select {
     height: 260px;
 }
 
-#center{
+#centerTitulo{
     text-align:center;
     color: rgba(255, 255, 255, 0.85);
     font-size: 1.5em;
     font-weight: 300;
     
 }
+
+.centerFotos{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 450px;
+    height: 260px;
+}
+
+.centerBusqueda{
+    text-align: center;
+}
+

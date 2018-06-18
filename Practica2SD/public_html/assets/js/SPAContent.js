@@ -2,10 +2,10 @@
 //Contenido HTML inicial de la página con los criterios de búsqueda disponibles para las fotos
 const htmlIndex = `
 <div class="inner">
-    <h3 id="center">Selecciona los criterios de búsqueda que desees para iniciar la búsqueda de fotos,
+    <h3 id="centerTitulo">Selecciona los criterios de búsqueda que desees,
     y pulse Siguiente para continuar</h3>
     <br>
-            <!-- Boxes -->
+
                 <div class="thumbnails">
 
                     <div class="box">
@@ -197,8 +197,7 @@ const typeForm = `
                 <br>
 `;
 
-//Contenido HTML adicional la página de busqueda por criterio, con la posibilidad de cambiar los parametros
-//de busqueda o volver al inicio de la página web
+//Contenido HTML adicional de la página de busqueda por criterios
 const restPageHtml = `
         <br><br>
         <div id="imagenes">
@@ -263,12 +262,13 @@ function changeContent(page, aditionalInfo) {
 
 }
 
-//Función que genera la página inicial de la web, añadiendole el contenido inicial antes creado en htmlIndex
-//y cambiando su contenido en caso de que el usuario haga click en un criterio de busqueda
+//Función que genera la página inicial de la web y crea la siguiente de busqueda por criterios
 function generateIndexPage() {
+    //Añadimos contenido inicial de la página
     $('#main').append().html(htmlIndex);
 
     /* Events*/
+    //Añadimos a un array los criterios que hemos seleccionado y cambiamos la pagina a la de los criterios de busqueda
     $('.busquedaBtn').click(function () {
         let checked = [];
         $('input:checked').each(function() {
@@ -283,13 +283,15 @@ function generateIndexPage() {
     });
 }
 
-//Función que genera la página de una busqueda de criterio, añadiendole el contenido HTML según el criterio
-//seleccionado, preparando la búsqueda en la API de flickr introduciendo el criterio seleccionado en la 
-//variable "search" y creando eventos para cambiar los parametros de busqueda o volver al inicio de la web
-var textoBusqueda=""; /* El texto con los parametros de la busqueda que se mostrara al lado de cada foto en los resultados */
+//El texto con los parametros de la busqueda que se mostrara al lado de cada foto en los resultados
+var textoBusqueda="";
+
+//Función que genera la página de una busqueda de criterio, 
 function generateBusquedaCriterio(criterio) {
     let form = `<div class="inner inicio"> `;
     form+=` <h2 class="tituloBusq">Fotos a partir de los criterios seleccionados</h2> `;
+    
+    //Añadimos a la variable form el contenido HTML de los criteros marcados anteriormente
     for (let n in criterio){ 
         switch (criterio[n]) {
             case "etiqueta":
@@ -340,7 +342,7 @@ function generateBusquedaCriterio(criterio) {
             }
     }
 
-
+    //Añadimos el resto de la pagina de busqueda por criterios y lo creamos en el div main
     form += 
     ` <span id="enviarSpan" >
         <h3>Pulsa el boton para buscar</h3>
@@ -354,7 +356,7 @@ function generateBusquedaCriterio(criterio) {
         let search = "";
         textoBusqueda = "";
         $("#enviarSpan").hide("slow");
-        /* Se recogen los datos de la busqueda de los inputs que pertenecen la clase .inputData */
+        //Se recogen los datos de la busqueda de los inputs que pertenecen la clase .inputData 
         $(".inputData").each(function() {
             search += '&';
             search += $(this).attr("search") + $(this).val();
@@ -362,8 +364,7 @@ function generateBusquedaCriterio(criterio) {
 
         });
 
-        console.log(search);
-
+        //Realizamos la petición a la API de Flickr para que nos muestre las fotos con esos criterios
         $.getJSON('https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key=' +
             api_key + '&user_id=' + user_id + search +
             '&format=json&nojsoncallback=1',
@@ -371,7 +372,7 @@ function generateBusquedaCriterio(criterio) {
         );
     });
 
-
+    //Eventos para los botones de cambiar parámetros y volver al inicio
     $('#buscarPorOtraEtiqueta').click(function () {
         generateBusquedaCriterio(criterio);
     })
@@ -382,12 +383,12 @@ function generateBusquedaCriterio(criterio) {
 
 }
 
-//Función que genera la página de una imagen especifica, seleccionada previamente de las resultantes de una 
-//búsqueda, además crea el evento para volver a la página inicial haciendo click en un botón
+//Función que genera la página de una imagen especifica
 function generateImagenConcreta(url) {
-
+    //Añadimios el contenido HTML para una imagen especifica
     $('#main').append().html(imagenConcretaHtml);
 
+    //Añadimos el atributo src con la imagen procedente de la URL de la API de Flickr
     $('#imageReceptor').attr("src", url + '_b.jpg')
 
     $('#botonIndex').click(function () {
@@ -403,20 +404,22 @@ function mostrar_fotos(info) {
     if (info.photos.photo.length == 0) {
         $("#imagenes").append().html(`<h3> No hay fotos que coincidan con los parametros de busqueda </h3>`);
     } else {
-        $("#imagenes").append("<div>").addClass("thumbnails");
         for (i = 0; i < info.photos.photo.length; i++) {
             var item = info.photos.photo[i];
             var url = 'https://farm' + item.farm + ".staticflickr.com/" + item.server +
                 '/' + item.id + '_' + item.secret;
             urls.push(url);
+            //Añadimos las imagenes de la consulta al div con id "imagenes"
             $("#imagenes").append($("<img/>").attr({
                 "src": url + '_m.jpg',
-                "id": i
-            }).click(function () {
+                "id": i,
+                "class": 'centerFotos'
+            }).click(function () {                  //Funcion para mostrar una imagen concreta
                 let j = $(this).attr('id');
                 changeContent("imagenConcreta", urls[j]);
             }).addClass("link"));
-            $("#imagenes").append($("<p> Busqueda = " + "<b>" + textoBusqueda + "</b>" + "</p>"));
+            //Añadimos el texto de busqueda con los criterios seleccionados previamente
+            $("#imagenes").append($("<p> Busqueda = " + "<b>" + textoBusqueda + "</b>" + "</p>").addClass("centerBusqueda"));
 
         }
     }
